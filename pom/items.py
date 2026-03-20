@@ -1,9 +1,11 @@
+"""Shared data models and helpers used across all page objects."""
 from dataclasses import dataclass
 from enum import Enum
 from playwright.sync_api import Locator
 
 
 class ProductName(Enum):
+    """Canonical product names for all items available on SauceDemo."""
     BACKPACK = "Sauce Labs Backpack"
     BIKE_LIGHT = "Sauce Labs Bike Light"
     BOLT_T_SHIRT = "Sauce Labs Bolt T-Shirt"
@@ -14,6 +16,7 @@ class ProductName(Enum):
 
 @dataclass
 class InventoryItem:
+    """Represents a single product as it appears on inventory or cart pages."""
     name: str
     description: str
     price: float

@@ -1,3 +1,4 @@
+"""Page Object Model for the SauceDemo inventory (products) page."""
 import logging
 from dotenv import load_dotenv
 from playwright.sync_api import Page
@@ -10,7 +11,10 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 class InventoryPage:
+    """Encapsulates interactions with the inventory/products listing page."""
+
     def __init__(self, page: Page):
+        """Initialise the page object and set up locators for inventory elements."""
         self.page = page
         self.items_filter_sorter = self.page.locator(".product_sort_container")
         self.items = self.page.locator(".inventory_item")
@@ -18,9 +22,11 @@ class InventoryPage:
         self.shopping_cart = self.page.locator(".shopping_cart_link")
 
     def get_image_count(self) -> int:
+        """Return the total number of product images displayed on the page."""
         return self.items_image.count()
-    
+
     def get_all_inventory_items(self) -> list[InventoryItem]:
+        """Return all inventory items on the page with their buttons and image URLs populated."""
         results = extract_items(self.items)
 
         for i, item in enumerate(results):

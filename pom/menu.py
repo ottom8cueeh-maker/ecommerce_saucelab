@@ -1,29 +1,37 @@
-import os
+"""Page Object Model for the SauceDemo hamburger navigation menu."""
 import logging
 from playwright.sync_api import Page
 
 logger = logging.getLogger(__name__)
 
 class Menu_Items:
+    """Encapsulates interactions with the slide-out navigation menu."""
+
     def __init__(self, page: Page):
+        """Initialise the menu object and set up locators for all menu elements."""
         self.page = page
         self.menu_button = self.page.locator("#react-burger-menu-btn")
         self.logout = self.page.locator("#logout_sidebar_link")
         self.inventory = self.page.locator("#inventory_sidebar_link")
         self.menu_close = self.page.locator("#react-burger-cross-btn")
         self.reset_app_state = self.page.locator("#reset_sidebar_link")
-        
+
     def open_menu(self):
-        self.menu_button.click()    
-        
+        """Click the hamburger button to open the navigation menu."""
+        self.menu_button.click()
+
     def click_logout(self):
+        """Click the Logout link to sign out of the application."""
         self.logout.click()
-        
+
     def click_inventory(self):
-        self.inventory.click()  
-        
+        """Click the All Items link to navigate to the inventory page."""
+        self.inventory.click()
+
     def click_reset_app_state(self):
-        self.reset_app_state.click()    
-    
+        """Click the Reset App State link to clear the cart and reset the session."""
+        self.reset_app_state.click()
+
     def click_menu_close(self):
+        """Click the X button to close the navigation menu."""
         self.menu_close.click()
