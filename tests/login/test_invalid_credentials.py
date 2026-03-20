@@ -1,7 +1,6 @@
 """Tests for invalid login credentials on the SauceDemo login page."""
-import pytest
 import logging
-
+import pytest
 from playwright.sync_api import expect
 from pom.login import LoginPage
 from pom.startingpage import StartingPage
@@ -26,7 +25,7 @@ def test_invalid_credentials(page, base_url):
     login_page = LoginPage(page)
     starting_page = StartingPage(page)
     starting_page.goto_url(base_url)
-    
+
     page.wait_for_url(base_url)
     assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
     logger.info("%s loaded successfully", base_url)

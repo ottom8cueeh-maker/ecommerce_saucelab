@@ -1,7 +1,5 @@
 """Tests for valid login credentials on the SauceDemo login page."""
 import logging
-import time
-
 import pytest
 from pom.inventory import InventoryPage
 from pom.login import LoginPage
@@ -48,7 +46,6 @@ def test_valid_credentials(page, base_url, products_url):
     inventory_page = InventoryPage(page)
     assert inventory_page.items_filter_sorter.is_visible(), "Item filter sorter is not visible"
     logger.info("Result: Item filter sorter is visible, test passed")
-    
+
     sl_menu.menu_button.click()
     sl_menu.logout.click()
-    time.sleep(2)
