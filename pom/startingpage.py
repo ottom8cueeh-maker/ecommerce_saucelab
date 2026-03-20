@@ -12,9 +12,10 @@ logger = logging.getLogger(__name__)
 class StartingPage:
     """Base page object that all POM pages inherit shared navigation helpers from."""
 
-    def __init__(self, page: Page):
+    def __init__(self, page: Page, base_url: str | None = None):
         """Initialise the page object with the Playwright page instance."""
         self.page = page
+        self.base_url = base_url
 
     def goto_url(self, url: str | None = None):
         """Navigate the browser to the login page.

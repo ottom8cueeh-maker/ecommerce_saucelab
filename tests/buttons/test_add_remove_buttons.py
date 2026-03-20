@@ -1,3 +1,4 @@
+"""Tests for add-to-cart and remove-from-cart button behaviour on the inventory and cart pages."""
 import logging
 import pytest
 from playwright.sync_api import expect
@@ -11,6 +12,16 @@ logger = logging.getLogger(__name__)
 
 @pytest.mark.SMOKE
 def test_add_remove_buttons(page, base_url):
+    """
+    Verify that items can be added to and removed from the cart on both the inventory and cart pages.
+
+    Steps:
+        1. Log in with valid credentials.
+        2. Add all six items to the cart from the inventory page.
+        3. Remove two items from the cart on the inventory page and verify the cart count.
+        4. Navigate to the shopping cart page.
+        5. Remove two more items from the cart on the cart page and verify the cart count.
+    """
     login_page = LoginPage(page)
     starting_page = StartingPage(page)
     products_url = f"{base_url}inventory.html"

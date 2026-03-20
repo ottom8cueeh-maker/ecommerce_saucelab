@@ -1,3 +1,4 @@
+"""Page Object Model for the SauceDemo shopping cart page."""
 import logging
 from dotenv import load_dotenv
 from playwright.sync_api import Page, expect
@@ -10,6 +11,7 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 class ShoppingCart:
+    """Encapsulates interactions with the shopping cart page and cart icon."""
     def __init__(self, page: Page):
         """Initialize ShoppingCart with a Playwright Page and set up locators."""
         self.page = page
