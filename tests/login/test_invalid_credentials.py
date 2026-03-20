@@ -27,7 +27,6 @@ def test_invalid_credentials(page, base_url):
     starting_page = StartingPage(page)
     starting_page.goto_url(base_url)
     
-
     page.wait_for_url(base_url)
     assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
     logger.info("%s loaded successfully", base_url)
