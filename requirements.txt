@@ -1,0 +1,6 @@
+playwright==1.58.0
+pytest==9.0.2
+PyYAML==6.0.3
+python-dotenv
+pytest-playwright
+pytest-base-url
