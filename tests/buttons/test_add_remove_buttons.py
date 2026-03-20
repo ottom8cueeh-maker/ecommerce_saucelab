@@ -26,7 +26,7 @@ def test_add_remove_buttons(page, base_url):
     starting_page = StartingPage(page)
     products_url = f"{base_url}inventory.html"
     starting_page.goto_url(base_url)
-    
+
      # ------------------------------- Login page -----------------------------------
     page.wait_for_url(base_url)
     assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
@@ -47,8 +47,8 @@ def test_add_remove_buttons(page, base_url):
     expect(inventory_page.shopping_cart).to_be_visible()
     assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
     logger.info("%s loaded successfully", products_url)
-    
-    # inventory page: Add  item(s) to shopping cart    
+
+    # inventory page: Add  item(s) to shopping cart
     inventory_items = inventory_page.get_all_inventory_items()
     inventory_items_by_name = {item.name: item for item in inventory_items}
 
@@ -66,7 +66,7 @@ def test_add_remove_buttons(page, base_url):
     cart_count = shopping_cart.get_cart_items_count()
     assert cart_count == 6, f"Expected 6 items in cart, but found {cart_count}"
     logger.info("Verify: Total of %d item(s) successfully added to shopping cart", cart_count)
-    
+
     # inventory page: remove item(s) from shopping cart
     inventory_items_by_name[ProductName.BACKPACK.value].remove_from_cart_button.click()
     logger.info("Inventory page: Removed '%s' from shopping cart...", ProductName.BACKPACK.value)
@@ -78,7 +78,7 @@ def test_add_remove_buttons(page, base_url):
     cart_count = shopping_cart.get_cart_items_count()
     assert cart_count == 4, f"Expected 4 items in cart, but found {cart_count}"
     logger.info("Verify: Total of %d item(s) are in the shopping cart", cart_count)
-    
+
     shopping_cart.click_shopping_cart_icon()
     logger.info("Navigate: Clicking shopping cart icon ---> shopping cart page...")
 
@@ -89,19 +89,18 @@ def test_add_remove_buttons(page, base_url):
 
     assert page.url == f"{base_url}cart.html", f"Expected URL {base_url}cart.html, got {page.url}"
     logger.info("%scart.html loaded successfully", base_url)
-    
+
     cart = ShoppingCart(page)
     cart_items = cart.get_items()
     cart_items_by_name = {item.name: item for item in cart_items}
-    
+
     # remove items from cart page
     cart_items_by_name[ProductName.BOLT_T_SHIRT.value].remove_from_cart_button.click()
     logger.info("cart page: Removed '%s' from shopping cart...", ProductName.BOLT_T_SHIRT.value)
     cart_items_by_name[ProductName.FLEECE_JACKET.value].remove_from_cart_button.click()
     logger.info("cart page: Removed '%s' from shopping cart...", ProductName.FLEECE_JACKET.value)
-    
+
     # grab cart items for comparison later
     cart_count = shopping_cart.get_cart_items_count()
     assert cart_count == 2, f"Expected 2 items in cart, but found {cart_count}"
     logger.info("Verify: Total of %d item(s) are in the shopping cart", cart_count)
-

@@ -34,7 +34,7 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
 
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> buttons to move forward >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     logger.info(">>>>>>>>>>>> Testing navigation buttons that move user forward to next pages... >>>>>>>>>>>>")
-    
+
     # ------------------------------- Login page -----------------------------------
     page.wait_for_url(base_url)
     assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
@@ -55,19 +55,19 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
     expect(inventory_page.shopping_cart).to_be_visible()
     assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
     logger.info("%s loaded successfully", products_url)
-    
+
     # ------- from inventory page ---> cart page -------
     # start - already on inventory page from previous steps
     logger.info(">>> Start:  inventory page...")
 
-    # Add  item(s) to shopping cart    
+    # Add  item(s) to shopping cart
     items = inventory_page.get_all_inventory_items()
     items[0].add_to_cart_button.click()
     logger.info("Test step: Adding first item to shopping cart...")
 
     shopping_cart = ShoppingCart(page)
 
-    # Click shopping cart icon      
+    # Click shopping cart icon
     shopping_cart.click_shopping_cart_icon()
     logger.info("Click shopping cart icon...")
 
@@ -79,27 +79,27 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
     # ------- from shopping cart page ---> checkout step one page -------
     # start - already on cart page from previous steps
     logger.info(">>> Start:  shopping cart page...")
-    
+
     shopping_cart.click_checkout_button()
-    logger.info("Click checkout button...")    
+    logger.info("Click checkout button...")
 
     checkout_page_one = CheckoutStepOnePage(page)
     page.wait_for_load_state("domcontentloaded")
     expect(checkout_page_one.continue_button).to_be_visible()
     logger.info("Verify: shopping cart page ---> checkout step one page - passed")
-    
+
     # ------- from checkout step one page ---> checkout step two page -------
     # start - already on checkout step one page from previous steps
     logger.info(">>> Start:  checkout step one page...")
-    
-    logger.info("Entering user information on checkout step one page...")  
+
+    logger.info("Entering user information on checkout step one page...")
     checkout_page_one.enter_first_name(checkout_data["first_name"])
     checkout_page_one.enter_last_name(checkout_data["last_name"])
     checkout_page_one.enter_postal_code(checkout_data["zip_code"])
 
     checkout_page_one.click_continue_button()
-    logger.info("Clicking continue button...") 
-    
+    logger.info("Clicking continue button...")
+
     checkout_page_two = CheckoutStepTwoPage(page)
     page.wait_for_load_state("domcontentloaded")
     expect(checkout_page_two.finish_button).to_be_visible()
@@ -117,7 +117,7 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
      # click finish button to complete purchase
     checkout_page_two.click_finish_button()
     logger.info("Clicking finish button...")
-  
+
     checkout_complete_page = CheckoutCompletePage(page)
     page.wait_for_load_state("domcontentloaded")
     expect(checkout_complete_page.back_home_button).to_be_visible()
@@ -125,7 +125,7 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
 
     # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< buttons to move backward <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     logger.info("<<<<<<<<<<<< Testing navigation buttons that move user back to previous pages... <<<<<<<<<<<<")
-    
+
     # -------from checkout complete page <--- checkout step two page -------
     # start - already on checkout complete page from previous steps
     logger.info("<<< Start:  checkout complete page...")
@@ -137,14 +137,14 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
     page.wait_for_load_state("domcontentloaded")
     expect(inventory_page.shopping_cart).to_be_visible()
     logger.info("Verify: Checkout complete page <--- inventory page - passed.")
-    
+
     # ------- from checkout step two <--- inventory page -------
     # start
     starting_page.goto_url(checkout_step_two_url)
     page.wait_for_load_state("domcontentloaded")
     expect(checkout_page_two.cancel_button).to_be_visible()
     logger.info("<<< Start:  checkout step two page...")
-    
+
 
     # click cancel button
     checkout_page_two.click_cancel_button()
@@ -158,7 +158,7 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
 
     # ------- from checkout step one page <--- cart page -------
     # start
-    starting_page.goto_url(checkout_step_one_url)    
+    starting_page.goto_url(checkout_step_one_url)
     page.wait_for_load_state("domcontentloaded")
     expect(checkout_page_one.continue_button).to_be_visible()
     logger.info("<<< Start:  checkout step one page...")

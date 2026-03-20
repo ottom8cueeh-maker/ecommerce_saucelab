@@ -50,43 +50,43 @@ def test_menu_sidebar(page, base_url, products_url):
 
     assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
     logger.info("%s loaded successfully", products_url)
-      
+
     shopping_cart = ShoppingCart(page)
     shopping_cart.click_shopping_cart_icon()
     logger.info("Navigate: Clicking shopping cart icon ---> shopping cart page...")
-    
+
     # click menu button:  open menu
     sl_menu.menu_button.click()
     logger.info("Clicking menu button ---> menu sidebar should be visible")
-    
+
     # verify menu items are visible
     expect(sl_menu.logout).to_be_visible()
     expect(sl_menu.inventory).to_be_visible()
     expect(sl_menu.reset_app_state).to_be_visible()
     expect(sl_menu.menu_close).to_be_visible()
     logger.info("Verify: All menu items are visible when menu is opened")
-    
+
     # click close menu button:  menu should be closed
     sl_menu.menu_close.click()
-    logger.info("Clicking menu close button ---> menu sidebar should be closed")    
-    
+    logger.info("Clicking menu close button ---> menu sidebar should be closed")
+
     # reopen menu
     sl_menu.menu_button.click()
     logger.info("Clicking menu button ---> menu sidebar should be visible")
-    
+
     # click inventory menu item
     sl_menu.click_inventory()
     logger.info("Clicking 'Inventory' menu item ---> should navigate to inventory page")
     page.wait_for_url(products_url)
     assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
     logger.info("Verify: Clicking 'Inventory' menu item navigates to inventory page")
-    
+
     # reopen menu
     sl_menu.menu_button.click()
     logger.info("Clicking menu button ---> menu sidebar should be visible")
-    
+
     # click logout menu item
-    sl_menu.click_logout()  
+    sl_menu.click_logout()
     logger.info("Clicking 'Logout' menu item ---> should navigate to login page")
     page.wait_for_url(base_url)
     assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"

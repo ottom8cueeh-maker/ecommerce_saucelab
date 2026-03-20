@@ -54,7 +54,7 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
     logger.info("%s loaded successfully", products_url)
 
-    # Add  item(s) to shopping cart    
+    # Add  item(s) to shopping cart
     inventory_items = inventory_page.get_all_inventory_items()
     inventory_items_by_name = {item.name: item for item in inventory_items}
     inventory_items_by_name[ProductName.BACKPACK.value].add_to_cart_button.click()
@@ -77,12 +77,12 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
 
     assert page.url == f"{base_url}cart.html", f"Expected URL {base_url}cart.html, got {page.url}"
     logger.info("%scart.html loaded successfully", base_url)
-    
+
     # grab cart items for comparison later
     cart_items = extract_items(shopping_cart.items)
-    
+
     shopping_cart.click_checkout_button()
-    logger.info("Navigate: Clicking checkout button on shopping cart page ---> checkout step one page...")    
+    logger.info("Navigate: Clicking checkout button on shopping cart page ---> checkout step one page...")
 
     # ------------------------------ checkout step one page -----------------------------------
     # wait for page to load
@@ -94,14 +94,14 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     expect(checkout_page_one.cancel_button).to_be_visible()
     logger.info("%scheckout-step-one.html loaded successfully", base_url)
 
-    # checkout step one page: enter user information and continue to checkout step two page  
-    logger.info("Entering user information on checkout step one page...")  
+    # checkout step one page: enter user information and continue to checkout step two page
+    logger.info("Entering user information on checkout step one page...")
     checkout_page_one.enter_first_name(checkout_data["first_name"])
     checkout_page_one.enter_last_name(checkout_data["last_name"])
     checkout_page_one.enter_postal_code(checkout_data["zip_code"])
 
     checkout_page_one.click_continue_button()
-    logger.info("Navigate: Clicking continue button on checkout step one page ---> checkout step two page...") 
+    logger.info("Navigate: Clicking continue button on checkout step one page ---> checkout step two page...")
 
     # ------------------------------ checkout step two page -----------------------------------
     # wait for page to load
@@ -114,12 +114,12 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     logger.info("%scheckout-step-two.html loaded successfully", base_url)
 
     # verify payment and shipping information are not empty
-    payment_info = checkout_page_two.get_payment_info()    
+    payment_info = checkout_page_two.get_payment_info()
     assert payment_info, "Expected payment information to be displayed, but it is empty"
     logger.info("Verify:  Payment information displayed on checkout step two page: %s", payment_info)
 
     shipping_info = checkout_page_two.get_shipping_info()
-    assert shipping_info, "Expected shipping information to be displayed, but it is empty"    
+    assert shipping_info, "Expected shipping information to be displayed, but it is empty"
     logger.info("Verify:  Shipping information displayed on checkout step two page: %s", shipping_info)
 
     # compare selected items on cart page vs check out step two page to ensure they are the same
@@ -132,7 +132,7 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     checkout_step_two_item_total = checkout_page_two.get_summary_item_total_price()
     assert checkout_step_two_prices_sum == checkout_step_two_item_total, f"Expected item total ${checkout_step_two_prices_sum:.2f} to match page subtotal ${checkout_step_two_item_total:.2f}"
     logger.info("Verify:  Summing up prices of items matches displayed 'Item total': $%.2f", checkout_step_two_prices_sum)
-    
+
     checkout_step_two_items_tax = checkout_page_two.get_summary_tax_price()
     logger.info("Verify:  Displayed tax on checkout step two page: $%.2f", checkout_step_two_items_tax)
 
@@ -175,10 +175,9 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
 
     #click back home button to return to inventory page
     checkout_complete_page.click_back_home_button()
-    logger.info("Navigate: Clicking back home button ---> inventory page") 
+    logger.info("Navigate: Clicking back home button ---> inventory page")
 
      # wait for page to load
     page.wait_for_url(products_url)
     assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
     logger.info("Verify:  Successfully returned to inventory page at URL: %s", products_url)
-    
