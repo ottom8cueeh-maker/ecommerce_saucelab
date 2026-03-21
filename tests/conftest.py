@@ -30,7 +30,12 @@ def checkout_data(input_data):
     return input_data["checkout_step_1_data"]
 
 @pytest.fixture(scope="session")
-def checkout_complete_data(captured_data):
+def checkout_step_1_errors(captured_data):  # noqa: F811
+    """Return the expected error messages for the checkout step one form validation."""
+    return captured_data["checkout_step_1_errors"]
+
+@pytest.fixture(scope="session")
+def checkout_complete_data(captured_data):  # noqa: F811
     """Return the expected text values for the checkout complete confirmation page."""
     return captured_data["checkout_complete"]
 
