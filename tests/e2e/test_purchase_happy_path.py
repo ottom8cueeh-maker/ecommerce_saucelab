@@ -96,9 +96,7 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
 
     # checkout step one page: enter user information and continue to checkout step two page
     logger.info("Entering user information on checkout step one page...")
-    checkout_page_one.enter_first_name(checkout_data["first_name"])
-    checkout_page_one.enter_last_name(checkout_data["last_name"])
-    checkout_page_one.enter_postal_code(checkout_data["zip_code"])
+    checkout_page_one.enter_info(checkout_data["first_name"], checkout_data["last_name"], checkout_data["zip_code"])
 
     checkout_page_one.click_continue_button()
     logger.info("Navigate: Clicking continue button on checkout step one page ---> checkout step two page...")
