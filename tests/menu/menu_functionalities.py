@@ -3,7 +3,7 @@ import logging
 from playwright.sync_api import expect
 from pom.inventory import InventoryPage
 from pom.login import LoginPage
-from pom.menu import Menu_Items
+from pom.menu import MenuItems
 from pom.shopping_cart import ShoppingCart
 from pom.startingpage import StartingPage
 
@@ -27,7 +27,7 @@ def test_menu_sidebar(page, base_url, products_url):
     login_page = LoginPage(page)
     starting_page = StartingPage(page)
     starting_page.goto_url(base_url)
-    sl_menu = Menu_Items(page)
+    sl_menu = MenuItems(page)
 
     # ------------------------------- Login page -----------------------------------
     page.wait_for_url(base_url)

@@ -1,7 +1,7 @@
 """Page Object Model for the SauceDemo checkout step one page."""
 import logging
 from playwright.sync_api import Page
-from pom.menu import Menu_Items
+from pom.menu import MenuItems
 
 logger = logging.getLogger(__name__)
 
@@ -11,7 +11,7 @@ class CheckoutStepOnePage:
     def __init__(self, page: Page):
         """Initialise the page object and set up locators for all form elements."""
         self.page = page
-        self.menu = Menu_Items(page)
+        self.menu = MenuItems(page)
         self.first_name_input = self.page.locator("#first-name")
         self.last_name_input = self.page.locator("#last-name")
         self.zip_code_input = self.page.locator("#postal-code")

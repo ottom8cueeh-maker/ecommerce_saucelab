@@ -1,7 +1,7 @@
 """Page Object Model for the SauceDemo checkout step two (order summary) page."""
 import logging
 from playwright.sync_api import Page
-from pom.menu import Menu_Items
+from pom.menu import MenuItems
 from pom.items import InventoryItem, extract_items
 
 logger = logging.getLogger(__name__)
@@ -12,7 +12,7 @@ class CheckoutStepTwoPage:
     def __init__(self, page: Page):
         """Initialise the page object and set up locators for all summary elements."""
         self.page = page
-        self.menu = Menu_Items(page)
+        self.menu = MenuItems(page)
         self.payment_info_value = self.page.locator("[data-test='payment-info-value']")
         self.shipping_info_value = self.page.locator("[data-test='shipping-info-value']")
         self.subtotal_value = self.page.locator(".summary_subtotal_label")

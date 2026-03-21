@@ -2,7 +2,7 @@
 import logging
 from dotenv import load_dotenv
 from playwright.sync_api import Page, expect
-from pom.menu import Menu_Items
+from pom.menu import MenuItems
 from pom.items import InventoryItem, extract_items
 
 # Load environment variables from .env file
@@ -15,7 +15,7 @@ class ShoppingCart:
     def __init__(self, page: Page):
         """Initialize ShoppingCart with a Playwright Page and set up locators."""
         self.page = page
-        self.menu = Menu_Items(page)
+        self.menu = MenuItems(page)
         self.checkout_button = self.page.locator("#checkout")
         self.continue_shopping_button = self.page.locator("#continue-shopping")
         self.shopping_cart_icon = self.page.locator(".shopping_cart_link")

@@ -3,7 +3,7 @@ import logging
 import pytest
 from pom.inventory import InventoryPage
 from pom.login import LoginPage
-from pom.menu import Menu_Items
+from pom.menu import MenuItems
 from pom.startingpage import StartingPage
 
 logger = logging.getLogger(__name__)
@@ -25,7 +25,7 @@ def test_valid_credentials(page, base_url, products_url):
     login_page = LoginPage(page)
     starting_page = StartingPage(page)
     starting_page.goto_url(base_url)
-    sl_menu = Menu_Items(page)
+    sl_menu = MenuItems(page)
 
     page.wait_for_url(base_url)
     assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
