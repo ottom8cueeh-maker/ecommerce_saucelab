@@ -1,15 +1,11 @@
 
 """Tests for form validation error messages on the SauceDemo checkout step one page."""
 import logging
-import pytest
 from dotenv.main import logger
 from playwright.sync_api import expect
-from pytest_playwright.pytest_playwright import page
 from pom.login import LoginPage
 from pom.checkout_step_one import CheckoutStepOnePage
 from pom.startingpage import StartingPage
-from tests.conftest import checkout_data, checkout_step_1_errors
-
 
 logger = logging.getLogger(__name__)
 

@@ -8,7 +8,7 @@ from pom.checkout_step_two import CheckoutStepTwoPage
 from pom.checkout_complete import CheckoutCompletePage
 from pom.inventory import InventoryPage
 from pom.login import LoginPage
-from pom.menu import Menu_Items
+from pom.menu import MenuItems
 from pom.shopping_cart import ShoppingCart
 from pom.startingpage import StartingPage
 from pom.items import extract_items, ProductName
@@ -30,7 +30,7 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     login_page = LoginPage(page)
     starting_page = StartingPage(page)
     starting_page.goto_url(base_url)
-    sl_menu = Menu_Items(page)
+    sl_menu = MenuItems(page)
 
     # ------------------------------- Login page -----------------------------------
     page.wait_for_url(base_url)
@@ -96,9 +96,7 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
 
     # checkout step one page: enter user information and continue to checkout step two page
     logger.info("Entering user information on checkout step one page...")
-    checkout_page_one.enter_first_name(checkout_data["first_name"])
-    checkout_page_one.enter_last_name(checkout_data["last_name"])
-    checkout_page_one.enter_postal_code(checkout_data["zip_code"])
+    checkout_page_one.enter_info(checkout_data["first_name"], checkout_data["last_name"], checkout_data["zip_code"])
 
     checkout_page_one.click_continue_button()
     logger.info("Navigate: Clicking continue button on checkout step one page ---> checkout step two page...")

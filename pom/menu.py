@@ -4,7 +4,7 @@ from playwright.sync_api import Page
 
 logger = logging.getLogger(__name__)
 
-class Menu_Items:
+class MenuItems:
     """Encapsulates interactions with the slide-out navigation menu."""
 
     def __init__(self, page: Page):
