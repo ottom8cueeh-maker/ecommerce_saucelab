@@ -18,7 +18,7 @@ class CheckoutStepOnePage:
         self.continue_button = self.page.locator("#continue")
         self.cancel_button = self.page.locator("#cancel")
         self.error_message = self.page.locator("[data-test='error']")
-        
+
     def enter_info(self, first_name: str = "", last_name: str = "", zip_code: str = ""):
         """Convenience method to fill all three form fields with the given values."""
         self.first_name_input.fill(first_name)
