@@ -1,7 +1,8 @@
 """Shared pytest fixtures for the SauceDemo e2e test suite."""
+from pathlib import Path
+
 import pytest
 import yaml
-from pathlib import Path
 from playwright.sync_api import Playwright
 
 @pytest.fixture(scope="session")
