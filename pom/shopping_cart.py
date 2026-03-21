@@ -16,7 +16,7 @@ class ShoppingCart:
         """Initialize ShoppingCart with a Playwright Page and set up locators."""
         self.page = page
         self.menu = Menu_Items(page)
-        self.checkout_button = self.page.locator("#checkout")        
+        self.checkout_button = self.page.locator("#checkout")
         self.continue_shopping_button = self.page.locator("#continue-shopping")
         self.shopping_cart_icon = self.page.locator(".shopping_cart_link")
         self.shopping_cart_badge = self.page.locator(".shopping_cart_badge")
@@ -29,11 +29,11 @@ class ShoppingCart:
             element = self.items.nth(i)
             item.remove_from_cart_button = element.get_by_role("button", name="Remove")
         return results
-        
+
     def get_cart_items_count(self):
         """Return the number of items in the cart as shown by the cart badge, or 0 if the badge is not visible."""
         return int(self.shopping_cart_badge.inner_text()) if self.shopping_cart_badge.is_visible() else 0
-    
+
     def click_shopping_cart_icon(self):
         """Wait for the page to load, assert the cart icon is visible and enabled, then click it."""
         self.page.wait_for_load_state("domcontentloaded")
@@ -54,7 +54,7 @@ class ShoppingCart:
         # Convert item name to lowercase and replace spaces with hyphens to match the id format
         item_id = item_name.lower().replace(" ", "-")
         return self.page.locator(f"#remove-{item_id}")
-    
+
     def remove_item_from_cart_on_cart_page(self, item_name: str):
         """Remove the specified item from the cart page and assert it is no longer visible."""
         remove_button = self.get_remove_item_button_locator(item_name)
