@@ -14,21 +14,17 @@ class CheckoutStepOnePage:
         self.menu = Menu_Items(page)
         self.first_name_input = self.page.locator("#first-name")
         self.last_name_input = self.page.locator("#last-name")
-        self.postal_code_input = self.page.locator("#postal-code")
+        self.zip_code_input = self.page.locator("#postal-code")
         self.continue_button = self.page.locator("#continue")
         self.cancel_button = self.page.locator("#cancel")
-
-    def enter_first_name(self, first_name: str):
-        """Fill the first name input field with the given value."""
+        self.error_message = self.page.locator("[data-test='error']")
+        
+    def enter_info(self, first_name: str = "", last_name: str = "", zip_code: str = ""):
+        """Convenience method to fill all three form fields with the given values."""
         self.first_name_input.fill(first_name)
-
-    def enter_last_name(self, last_name: str):
-        """Fill the last name input field with the given value."""
         self.last_name_input.fill(last_name)
-
-    def enter_postal_code(self, postal_code: str):
-        """Fill the postal/zip code input field with the given value."""
-        self.postal_code_input.fill(postal_code)
+        self.zip_code_input.fill(zip_code)
+        logger.info("Filled checkout step one form fields: first_name='%s', last_name='%s', zip_code='%s'", first_name, last_name, zip_code)
 
     def click_continue_button(self):
         """Click the Continue button to advance to checkout step two."""

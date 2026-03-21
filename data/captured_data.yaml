@@ -1,3 +1,8 @@
+checkout_step_1_errors:
+  first_name: "Error: First Name is required"
+  last_name: "Error: Last Name is required"
+  zip_code: "Error: Postal Code is required"
+
 checkout_complete:
   complete_header: "Thank you for your order!"
   complete_message: "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
