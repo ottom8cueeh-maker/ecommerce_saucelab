@@ -37,4 +37,3 @@ class CheckoutStepOnePage:
     def click_cancel_button(self):
         """Click the Cancel button to return to the shopping cart."""
         self.cancel_button.click()
-        

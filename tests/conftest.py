@@ -14,14 +14,14 @@ def configure_playwright(playwright: Playwright):
 def captured_data():
     """Load and return all test data from data/captured_data.yaml as a dictionary."""
     data_file = Path(__file__).parent.parent / "data" / "captured_data.yaml"
-    with open(data_file) as f:
+    with open(data_file, encoding="utf-8") as f:
         return yaml.safe_load(f)
 
 @pytest.fixture(scope="session")
 def input_data():
     """Load and return all test data from data/input_data.yaml as a dictionary."""
     data_file = Path(__file__).parent.parent / "data" / "input_data.yaml"
-    with open(data_file) as f:
+    with open(data_file, encoding="utf-8") as f:
         return yaml.safe_load(f)
 
 @pytest.fixture(scope="session")
