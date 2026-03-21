@@ -1,9 +1,3 @@
-# For every subsection, add  the subsection name to conftest.py as a fixture. The fixture should return the data for that subsection. For example, if you have a subsection called "checkout", you would add the following to conftest.py:
-checkout_step_1_data:
-  first_name: "John"
-  last_name: "Doe"
-  zip_code: "12345"
-
 checkout_complete:
   complete_header: "Thank you for your order!"
   complete_message: "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
