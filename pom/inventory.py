@@ -20,6 +20,7 @@ class InventoryPage:
         self.items = self.page.locator(".inventory_item")
         self.items_image = self.page.locator(".inventory_item_img img")
         self.shopping_cart = self.page.locator(".shopping_cart_link")
+        
 
     def get_image_count(self) -> int:
         """Return the total number of product images displayed on the page."""
@@ -36,3 +37,12 @@ class InventoryPage:
             item.remove_from_cart_button = element.get_by_role("button", name="Remove")
 
         return results
+
+class InventoryItemPage:
+    """Encapsulates interactions with a single inventory item details page."""
+    def __init__(self, page: Page):
+        self.page = page
+        self.back_to_products_button = self.page.locator("#back-to-products")
+        self.add_to_cart_button = self.page.locator("#add-to-cart")
+        self.remove_from_cart_button = self.page.locator("#remove")
+            
