@@ -7,4 +7,3 @@ checkout_complete:
   complete_header: "Thank you for your order!"
   complete_message: "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
   complete_status: "Checkout: Complete!"
-
