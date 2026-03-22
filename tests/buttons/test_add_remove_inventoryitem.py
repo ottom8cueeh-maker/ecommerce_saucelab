@@ -9,13 +9,11 @@ Covers:
 import logging
 import pytest
 from playwright.sync_api import expect
-from pytest_playwright.pytest_playwright import page
-from pom import shopping_cart
 from pom.inventory import InventoryItemPage, InventoryPage
 from pom.shopping_cart import ShoppingCart
 from pom.startingpage import StartingPage
 from pom.login import LoginPage
-
+from pom.items import ProductName
 
 logger = logging.getLogger(__name__)
 
@@ -56,10 +54,8 @@ def test_add_remove_inventoryitem(page, base_url):
     assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
     logger.info("%s loaded successfully", products_url)
 
-    # inventory_items = items.extract_items(inventory_page.items)
-    # items_by_name = {item.name: item for item in inventory_items}
-
-    page.get_by_text("Sauce Labs Backpack").click()
+    # click on item name
+    page.get_by_text(ProductName.BACKPACK.value).click()
     inventory_item_page = InventoryItemPage(page)
     inventory_item_page.add_to_cart_button.click()
     logger.info("Added item to cart from inventory item details page")
@@ -71,7 +67,7 @@ def test_add_remove_inventoryitem(page, base_url):
 
     inventory_item_page.back_to_products_button.click()
 
-    page.get_by_text("Sauce Labs Bike Light").click()
+    page.get_by_text(ProductName.BIKE_LIGHT.value).click()
     inventory_item_page.add_to_cart_button.click()
     logger.info("Inventory-item page: Added item to cart from inventory item details page")
 
@@ -81,7 +77,7 @@ def test_add_remove_inventoryitem(page, base_url):
 
     inventory_item_page.back_to_products_button.click()
 
-    page.get_by_text("Sauce Labs Backpack").click()
+    page.get_by_text(ProductName.BACKPACK.value).click()
     inventory_item_page.remove_from_cart_button.click()
     logger.info("Inventory-item page: Removed item from cart from inventory item details page")
 
