@@ -8,10 +8,3 @@ checkout_complete:
   complete_message: "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
   complete_status: "Checkout: Complete!"
 
-item_name_text:
-  back_pack: "Sauce Labs Backpack"
-  bike_light: "Sauce Labs Bike Light"
-  bolt_t_shirt: "Sauce Labs Bolt T-Shirt"
-  fleece_jacket: "Sauce Labs Fleece Jacket"
-  onesie: "Sauce Labs Onesie"
-  all_the_things_t_shirt: "Test.allTheThings() T-Shirt (Red)"
