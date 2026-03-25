@@ -50,7 +50,8 @@ ecommerce_saucelab/
 │   ├── menu/
 │   │   └── menu_functionalities.py
 │   └── product_sort/
-│       └── test_product_sorter.py
+│       ├── test_product_sorter.py
+│       └── test_social_media_links.py
 ├── pytest.ini
 └── requirements.txt
 ```
@@ -66,6 +67,7 @@ ecommerce_saucelab/
 | Buttons | `tests/buttons/test_page_navigation_buttons.py` | Page navigation buttons move the user through checkout |
 | Error Messages | `tests/error_messages/test_checkout_step1_errors.py` | Checkout step one form validation error messages |
 | Menu | `tests/menu/menu_functionalities.py` | Sidebar menu items are visible and functional |
+| Social Media | `tests/product_sort/test_social_media_links.py` | Footer social media links open the correct URLs in a new tab |
 | Product Sort | `tests/product_sort/test_product_sorter.py` | Inventory sort by price (low/high) and name (A-Z/Z-A) |
 | E2E | `tests/e2e/test_purchase_happy_path.py` | Full purchase flow from login to order confirmation |
 
@@ -120,6 +122,20 @@ Test data is split across two YAML files in `data/` and loaded via session-scope
 |---|---|---|
 | `data/input_data.yaml` | `input_data`, `checkout_data` | Checkout form inputs (first name, last name, zip code) |
 | `data/captured_data.yaml` | `captured_data`, `checkout_step_1_errors`, `checkout_complete_data` | Expected error messages and order confirmation text |
+
+### URL Fixtures
+
+URL fixtures are defined directly in `tests/conftest.py` (no YAML file).
+
+| Fixture | Value |
+|---|---|
+| `products_url` | `https://www.saucedemo.com/inventory.html` |
+| `cart_url` | `https://www.saucedemo.com/cart.html` |
+| `checkout_step_one_url` | `https://www.saucedemo.com/checkout-step-one.html` |
+| `checkout_step_two_url` | `https://www.saucedemo.com/checkout-step-two.html` |
+| `x_url` | `https://x.com/saucelabs` |
+| `facebook_url` | `https://www.facebook.com/saucelabs` |
+| `linkedin_url` | `https://www.linkedin.com/company/sauce-labs` |
 
 ## Running Tests
 
