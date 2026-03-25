@@ -165,5 +165,5 @@ The project uses `pytest.ini` for:
 ## Notes
 
 - The framework uses Playwright's `data-test` selector strategy where appropriate.
-- Page objects are located under `ui/pom`.
+- Page objects are located under `pom`.
 - Fixtures and shared test data loaders are located in `tests/conftest.py`.
