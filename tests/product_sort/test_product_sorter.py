@@ -46,6 +46,7 @@ def test_product_sorter(page, base_url):
 
     # sort prices low to high and verify
     inventory_page.sort_items("lohi" )
+    logger.info("Sorting products by price (low to high)...")
     items = inventory_page.get_all_inventory_items()
     prices = [item.price for item in items]
     assert prices == sorted(prices), "Products are not sorted by price (low to high)"
@@ -53,6 +54,7 @@ def test_product_sorter(page, base_url):
 
     # sort prices high to low and verify
     inventory_page.sort_items("hilo")
+    logger.info("Sorting products by price (high to low)...")
     items = inventory_page.get_all_inventory_items()
     prices = [item.price for item in items]
     assert prices == sorted(prices, reverse=True), "Products are not sorted by price (high to low)"
@@ -60,6 +62,7 @@ def test_product_sorter(page, base_url):
 
     # sort names A to Z and verify
     inventory_page.sort_items("az")
+    logger.info("Sorting products by name (A to Z)...")
     items = inventory_page.get_all_inventory_items()
     names = [item.name for item in items]
     assert names == sorted(names), "Products are not sorted by name (A to Z)"
@@ -67,6 +70,7 @@ def test_product_sorter(page, base_url):
 
     # sort names Z to A and verify
     inventory_page.sort_items("za")
+    logger.info("Sorting products by name (Z to A)...")
     items = inventory_page.get_all_inventory_items()
     names = [item.name for item in items]
     assert names == sorted(names, reverse=True), "Products are not sorted by name (Z to A)"
