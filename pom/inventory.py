@@ -21,6 +21,10 @@ class InventoryPage:
         self.items_image = self.page.locator(".inventory_item_img img")
         self.shopping_cart = self.page.locator(".shopping_cart_link")
         self.product_sort_dropdown = self.page.locator(".product_sort_container")
+        self.x_link = self.page.locator("a[href*='x.com']")
+        self.facebook_link = self.page.locator("a[href*='facebook.com']")
+        self.linkedin_link = self.page.locator("a[href*='linkedin.com']")
+        self.twitter_link = self.page.locator("a[href*='twitter.com']")
 
 
     def get_image_count(self) -> int:

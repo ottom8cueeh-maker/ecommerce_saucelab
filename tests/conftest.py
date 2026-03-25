@@ -58,3 +58,18 @@ def checkout_step_one_url():
 def checkout_step_two_url():
     """Return the URL for the checkout step two (order summary) page."""
     return "https://www.saucedemo.com/checkout-step-two.html"
+
+@pytest.fixture
+def x_url():
+    """Return the URL for the Sauce Labs dashboard."""
+    return "https://x.com/saucelabs"
+
+@pytest.fixture
+def facebook_url():
+    """Return the URL for the Sauce Labs Facebook page."""
+    return "https://www.facebook.com/saucelabs"
+
+@pytest.fixture
+def linkedin_url():
+    """Return the URL for the Sauce Labs LinkedIn page."""
+    return "https://www.linkedin.com/company/sauce-labs"
