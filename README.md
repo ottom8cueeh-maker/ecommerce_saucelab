@@ -8,10 +8,10 @@ UI test automation project for [SauceDemo](https://www.saucedemo.com) using Pyth
 |---|---|
 | playwright | 1.58.0 |
 | pytest | 9.0.2 |
-| pytest-playwright | latest |
-| pytest-base-url | latest |
+| pytest-playwright | 0.7.2 |
+| pytest-base-url | 2.1.0 |
 | PyYAML | 6.0.3 |
-| python-dotenv | latest |
+| python-dotenv | 1.2.2 |
 
 ## Project Structure
 
@@ -47,8 +47,10 @@ ecommerce_saucelab/
 │   ├── login/
 │   │   ├── test_invalid_credentials.py
 │   │   └── test_valid_credentials.py
-│   └── menu/
-│       └── menu_functionalities.py
+│   ├── menu/
+│   │   └── menu_functionalities.py
+│   └── product_sort/
+│       └── test_product_sorter.py
 ├── pytest.ini
 └── requirements.txt
 ```
@@ -64,6 +66,7 @@ ecommerce_saucelab/
 | Buttons | `tests/buttons/test_page_navigation_buttons.py` | Page navigation buttons move the user through checkout |
 | Error Messages | `tests/error_messages/test_checkout_step1_errors.py` | Checkout step one form validation error messages |
 | Menu | `tests/menu/menu_functionalities.py` | Sidebar menu items are visible and functional |
+| Product Sort | `tests/product_sort/test_product_sorter.py` | Inventory sort by price (low/high) and name (A-Z/Z-A) |
 | E2E | `tests/e2e/test_purchase_happy_path.py` | Full purchase flow from login to order confirmation |
 
 ### Markers
@@ -140,6 +143,7 @@ pytest tests/login/
 pytest tests/buttons/
 pytest tests/error_messages/
 pytest tests/menu/
+pytest tests/product_sort/
 ```
 
 Run smoke tests only:
