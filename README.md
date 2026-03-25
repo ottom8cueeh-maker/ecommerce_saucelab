@@ -49,7 +49,7 @@ ecommerce_saucelab/
 │   │   └── test_valid_credentials.py
 │   ├── menu/
 │   │   └── menu_functionalities.py
-│   └── inventory_other/
+│   └── inventory_page/
 │       ├── test_product_sorter.py
 │       └── test_social_media_links.py
 ├── pytest.ini
@@ -67,8 +67,8 @@ ecommerce_saucelab/
 | Buttons | `tests/buttons/test_page_navigation_buttons.py` | Page navigation buttons move the user through checkout |
 | Error Messages | `tests/error_messages/test_checkout_step1_errors.py` | Checkout step one form validation error messages |
 | Menu | `tests/menu/menu_functionalities.py` | Sidebar menu items are visible and functional |
-| Social Media | `tests/inventory_other/test_social_media_links.py` | Footer social media links open the correct URLs in a new tab |
-| Product Sort | `tests/inventory_other/test_product_sorter.py` | Inventory sort by price (low/high) and name (A-Z/Z-A) |
+| Social Media | `tests/inventory_page/test_social_media_links.py` | Footer social media links open the correct URLs in a new tab |
+| Product Sort | `tests/inventory_page/test_product_sorter.py` | Inventory sort by price (low/high) and name (A-Z/Z-A) |
 | E2E | `tests/e2e/test_purchase_happy_path.py` | Full purchase flow from login to order confirmation |
 
 ### Markers
@@ -159,7 +159,7 @@ pytest tests/login/
 pytest tests/buttons/
 pytest tests/error_messages/
 pytest tests/menu/
-pytest tests/inventory_other/
+pytest tests/inventory_page/
 ```
 
 Run smoke tests only:
