@@ -48,7 +48,7 @@ ecommerce_saucelab/
 │   │   ├── test_invalid_credentials.py
 │   │   └── test_valid_credentials.py
 │   ├── menu/
-│   │   └── menu_functionalities.py
+│   │   └── test_menu_functionalities.py
 │   └── inventory_page/
 │       ├── test_product_sorter.py
 │       └── test_social_media_links.py
@@ -66,7 +66,7 @@ ecommerce_saucelab/
 | Buttons | `tests/buttons/test_add_remove_inventoryitem.py` | Add/remove an item from the item details page |
 | Buttons | `tests/buttons/test_page_navigation_buttons.py` | Page navigation buttons move the user through checkout |
 | Error Messages | `tests/error_messages/test_checkout_step1_errors.py` | Checkout step one form validation error messages |
-| Menu | `tests/menu/menu_functionalities.py` | Sidebar menu items are visible and functional |
+| Menu | `tests/menu/test_menu_functionalities.py` | Sidebar menu items are visible and functional |
 | Social Media | `tests/inventory_page/test_social_media_links.py` | Footer social media links open the correct URLs in a new tab |
 | Product Sort | `tests/inventory_page/test_product_sorter.py` | Inventory sort by price (low/high) and name (A-Z/Z-A) |
 | E2E | `tests/e2e/test_purchase_happy_path.py` | Full purchase flow from login to order confirmation |
@@ -158,14 +158,8 @@ pytest tests/e2e/test_purchase_happy_path.py
 pytest tests/login/
 pytest tests/buttons/
 pytest tests/error_messages/
-pytest tests/menu/
+pytest tests/menu/test_menu_functionalities.py   # explicit path required — file lacks test_ prefix
 pytest tests/inventory_page/
-```
-
-Run smoke tests only:
-
-```bash
-pytest -m SMOKE
 ```
 
 ## Pytest Configuration
