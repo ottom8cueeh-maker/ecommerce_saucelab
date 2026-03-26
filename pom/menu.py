@@ -12,7 +12,7 @@ class MenuItems:
         self.page = page
         self.menu_button = self.page.locator("#react-burger-menu-btn")
         self.logout = self.page.locator("#logout_sidebar_link")
-        self.inventory = self.page.locator("#inventory_sidebar_link")
+        self.all_items = self.page.locator("#inventory_sidebar_link")
         self.menu_close = self.page.locator("#react-burger-cross-btn")
         self.reset_app_state = self.page.locator("#reset_sidebar_link")
 
@@ -24,9 +24,9 @@ class MenuItems:
         """Click the Logout link to sign out of the application."""
         self.logout.click()
 
-    def click_inventory(self):
+    def click_all_items(self):
         """Click the All Items link to navigate to the inventory page."""
-        self.inventory.click()
+        self.all_items.click()
 
     def click_reset_app_state(self):
         """Click the Reset App State link to clear the cart and reset the session."""

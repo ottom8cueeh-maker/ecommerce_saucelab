@@ -51,6 +51,7 @@ def test_menu_sidebar(page, base_url, products_url):
     assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
     logger.info("%s loaded successfully", products_url)
 
+    # open menu from shopping cart page to verify menu is accessible from there as well; setup to test click 'all items' later
     shopping_cart = ShoppingCart(page)
     shopping_cart.click_shopping_cart_icon()
     logger.info("Navigate: Clicking shopping cart icon ---> shopping cart page...")
@@ -59,9 +60,10 @@ def test_menu_sidebar(page, base_url, products_url):
     sl_menu.menu_button.click()
     logger.info("Clicking menu button ---> menu sidebar should be visible")
 
+    # ---------- test menu open/close & items visibility ----------
     # verify menu items are visible
     expect(sl_menu.logout).to_be_visible()
-    expect(sl_menu.inventory).to_be_visible()
+    expect(sl_menu.all_items).to_be_visible()
     expect(sl_menu.reset_app_state).to_be_visible()
     expect(sl_menu.menu_close).to_be_visible()
     logger.info("Verify: All menu items are visible when menu is opened")
@@ -74,18 +76,31 @@ def test_menu_sidebar(page, base_url, products_url):
     sl_menu.menu_button.click()
     logger.info("Clicking menu button ---> menu sidebar should be visible")
 
-    # click inventory menu item
-    sl_menu.click_inventory()
-    logger.info("Clicking 'Inventory' menu item ---> should navigate to inventory page")
+    # ---------- click menu item:  All items ----------
+    sl_menu.click_all_items()
+    logger.info("Clicking 'All Items' menu item ---> should navigate to inventory page")
     page.wait_for_url(products_url)
     assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
-    logger.info("Verify: Clicking 'Inventory' menu item navigates to inventory page")
+    logger.info("Verify: Clicking 'All Items' menu item navigates to inventory page")
 
-    # reopen menu
-    sl_menu.menu_button.click()
-    logger.info("Clicking menu button ---> menu sidebar should be visible")
+    # ---------- reset app state ----------
+    # setup: add item to cart so we can verify it gets cleared by reset app state
+    inventory_page.get_all_inventory_items()[0].add_to_cart_button.click()
+    inventory_page.get_all_inventory_items()[1].add_to_cart_button.click()
+    logger.info("Setup: Added 2 items to cart")
+    
+    # reopen menu from inventory page
+    sl_menu.menu_button.click()   # ← menu is now open
 
-    # click logout menu item
+    sl_menu.click_reset_app_state()
+    logger.info("Clicking 'Reset App State' menu item ---> should reset the app state (e.g. clear cart contents)")
+    # Verify: Cart should be empty after resetting app state
+    shopping_cart.click_shopping_cart_icon()
+    logger.info("Navigate: Clicking shopping cart icon ---> shopping cart page...")
+    expect(shopping_cart.items).to_have_count(0)
+    logger.info("Verify: Cart is empty after resetting app state")
+
+    # ---------- click menu item:  Logout ----------
     sl_menu.click_logout()
     logger.info("Clicking 'Logout' menu item ---> should navigate to login page")
     page.wait_for_url(base_url)
