@@ -1,9 +1,7 @@
 """Page Object Model for the SauceDemo checkout complete page."""
-import logging
 from playwright.sync_api import Page
 from pom.menu import MenuItems
 
-logger = logging.getLogger(__name__)
 
 class CheckoutCompletePage:
     """Encapsulates interactions with the checkout complete confirmation page."""

@@ -1,10 +1,8 @@
 """Page Object Model for the SauceDemo checkout step two (order summary) page."""
-import logging
 from playwright.sync_api import Page
 from pom.menu import MenuItems
 from pom.items import InventoryItem, extract_items
 
-logger = logging.getLogger(__name__)
 
 class CheckoutStepTwoPage:
     """Encapsulates interactions with the checkout step two (order review) page."""
@@ -40,7 +38,7 @@ class CheckoutStepTwoPage:
         item_total_text = self.subtotal_value.inner_text()
         item_total_price = float(item_total_text.replace("Item total: $", ""))
         return item_total_price
-    
+
     def get_summary_total_price(self) -> float:
         """Return the order total (items + tax) as a float."""
         total_text = self.total_value.inner_text()

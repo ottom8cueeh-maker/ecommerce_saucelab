@@ -1,7 +1,6 @@
 
 """Tests for form validation error messages on the SauceDemo checkout step one page."""
 import logging
-from dotenv.main import logger
 from playwright.sync_api import expect
 from pom.login import LoginPage
 from pom.checkout_step_one import CheckoutStepOnePage
