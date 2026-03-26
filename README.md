@@ -41,7 +41,8 @@ ecommerce_saucelab/
 │   │   ├── test_add_remove_inventoryitem.py
 │   │   └── test_page_navigation_buttons.py
 │   ├── e2e/
-│   │   └── test_purchase_happy_path.py
+│   │   ├── test_purchase_happy_path.py
+│   │   └── test_checkout_with_no_items.py
 │   ├── error_messages/
 │   │   └── test_checkout_step1_errors.py
 │   ├── login/
@@ -70,11 +71,13 @@ ecommerce_saucelab/
 | Social Media | `tests/inventory_page/test_social_media_links.py` | Footer social media links open the correct URLs in a new tab |
 | Product Sort | `tests/inventory_page/test_product_sorter.py` | Inventory sort by price (low/high) and name (A-Z/Z-A) |
 | E2E | `tests/e2e/test_purchase_happy_path.py` | Full purchase flow from login to order confirmation |
+| E2E | `tests/e2e/test_checkout_with_no_items.py` | Checkout cannot be initiated with an empty cart |
 
 ### Markers
 
 - `SMOKE` — core smoke tests
 - `REGRESSION` — regression tests
+- `NEGATIVE` — negative / edge-case tests
 
 ## Prerequisites
 
