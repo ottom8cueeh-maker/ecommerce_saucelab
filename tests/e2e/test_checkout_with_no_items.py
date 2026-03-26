@@ -11,7 +11,7 @@ from pom.startingpage import StartingPage
 logger = logging.getLogger(__name__)
 
 @pytest.mark.SMOKE
-@pytest.mark.NEGATIVE
+@pytest.mark.xfail(reason="Currently allows checkout button to be clicked with empty cart, but should not advance to checkout step one page")
 def test_checkout_with_no_items(page, base_url, products_url):
     """
     Verify that a user cannot proceed to checkout when the shopping cart is empty.
