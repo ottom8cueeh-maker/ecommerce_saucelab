@@ -38,7 +38,7 @@ class CheckoutStepTwoPage:
         item_total_text = self.subtotal_value.inner_text()
         item_total_price = float(item_total_text.replace("Item total: $", ""))
         return item_total_price
-    
+
     def get_summary_total_price(self) -> float:
         """Return the order total (items + tax) as a float."""
         total_text = self.total_value.inner_text()
