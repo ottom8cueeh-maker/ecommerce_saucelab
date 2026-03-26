@@ -2,6 +2,7 @@
 import logging
 from playwright.sync_api import expect
 from pom.inventory import InventoryPage
+from pom.items import ProductName
 from pom.login import LoginPage
 from pom.menu import MenuItems
 from pom.shopping_cart import ShoppingCart
@@ -84,23 +85,27 @@ def test_menu_sidebar(page, base_url, products_url):
     logger.info("Verify: Clicking 'All Items' menu item navigates to inventory page")
 
     # ---------- reset app state ----------
+    # inventory page: Add  item(s) to shopping cart
+    inventory_items = inventory_page.get_all_inventory_items()
+    inventory_items_by_name = {item.name: item for item in inventory_items}
+
     # setup: add item to cart so we can verify it gets cleared by reset app state
-    inventory_page.get_all_inventory_items()[0].add_to_cart_button.click()
-    inventory_page.get_all_inventory_items()[1].add_to_cart_button.click()
-    logger.info("Setup: Added 2 items to cart")
-    
+    inventory_items_by_name[ProductName.BACKPACK.value].add_to_cart_button.click()
+    inventory_items_by_name[ProductName.BIKE_LIGHT.value].add_to_cart_button.click()
+    logger.info("Inventory page: added 2 item(s) to shopping cart...")
+
     # reopen menu from inventory page
     sl_menu.menu_button.click()   # ← menu is now open
-
     sl_menu.click_reset_app_state()
     logger.info("Clicking 'Reset App State' menu item ---> should reset the app state (e.g. clear cart contents)")
-    # Verify: Cart should be empty after resetting app state
-    shopping_cart.click_shopping_cart_icon()
-    logger.info("Navigate: Clicking shopping cart icon ---> shopping cart page...")
-    expect(shopping_cart.items).to_have_count(0)
+
+    # verify cart is cleared after reset app state
+    cart_count = shopping_cart.get_cart_items_count()
+    assert cart_count == 0, f"Expected 0 items in cart, but found {cart_count}"
     logger.info("Verify: Cart is empty after resetting app state")
 
     # ---------- click menu item:  Logout ----------
+    # Menu is still open
     sl_menu.click_logout()
     logger.info("Clicking 'Logout' menu item ---> should navigate to login page")
     page.wait_for_url(base_url)
