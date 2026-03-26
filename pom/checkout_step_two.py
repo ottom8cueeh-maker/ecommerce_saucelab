@@ -1,10 +1,8 @@
 """Page Object Model for the SauceDemo checkout step two (order summary) page."""
-import logging
 from playwright.sync_api import Page
 from pom.menu import MenuItems
 from pom.items import InventoryItem, extract_items
 
-logger = logging.getLogger(__name__)
 
 class CheckoutStepTwoPage:
     """Encapsulates interactions with the checkout step two (order review) page."""

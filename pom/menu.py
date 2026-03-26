@@ -1,8 +1,6 @@
 """Page Object Model for the SauceDemo hamburger navigation menu."""
-import logging
 from playwright.sync_api import Page
 
-logger = logging.getLogger(__name__)
 
 class MenuItems:
     """Encapsulates interactions with the slide-out navigation menu."""
