@@ -18,6 +18,7 @@ from pom.items import ProductName
 logger = logging.getLogger(__name__)
 
 @pytest.mark.SMOKE
+@pytest.mark.FUNCTIONAL
 def test_add_remove_inventoryitem(page, base_url):
     """
     Verify that an item can be added to and removed from the cart on the inventory item details page.

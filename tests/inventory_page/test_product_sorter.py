@@ -1,12 +1,14 @@
 """Tests for the product sorting functionality on the SauceDemo inventory page."""
 import logging
 from playwright.sync_api import expect
+import pytest
 from pom.inventory import InventoryPage
 from pom.startingpage import StartingPage
 from pom.login import LoginPage
 
 logger = logging.getLogger(__name__)
 
+@pytest.mark.FUNCTIONAL
 def test_product_sorter(page, base_url):
     """
     Verify that the product sorting functionality on the inventory page works correctly.

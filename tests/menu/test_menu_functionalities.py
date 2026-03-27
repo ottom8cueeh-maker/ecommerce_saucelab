@@ -1,6 +1,7 @@
 """Tests for the sidebar menu functionality on the SauceDemo website."""
 import logging
 from playwright.sync_api import expect
+import pytest
 from pom.inventory import InventoryPage
 from pom.items import ProductName
 from pom.login import LoginPage
@@ -10,6 +11,7 @@ from pom.startingpage import StartingPage
 
 logger = logging.getLogger(__name__)
 
+@pytest.mark.FUNCTIONAL
 def test_menu_sidebar(page, base_url, products_url):
     """
     Verify menu items are visible and functional.

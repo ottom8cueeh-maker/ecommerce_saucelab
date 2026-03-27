@@ -11,6 +11,7 @@ from pom.startingpage import StartingPage
 logger = logging.getLogger(__name__)
 
 @pytest.mark.SMOKE
+@pytest.mark.FUNCTIONAL
 def test_add_remove_buttons(page, base_url):
     """
     Verify that items can be added to and removed from the cart on both the inventory and cart pages.
