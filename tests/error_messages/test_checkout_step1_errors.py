@@ -2,12 +2,14 @@
 """Tests for form validation error messages on the SauceDemo checkout step one page."""
 import logging
 from playwright.sync_api import expect
+import pytest
 from pom.login import LoginPage
 from pom.checkout_step_one import CheckoutStepOnePage
 from pom.startingpage import StartingPage
 
 logger = logging.getLogger(__name__)
 
+@pytest.mark.SMOKE
 def test_checkout_step_one_errors(page, base_url, checkout_step_one_url, checkout_data, checkout_step_1_errors):
     """
     Verify that the correct error messages are displayed when required fields are

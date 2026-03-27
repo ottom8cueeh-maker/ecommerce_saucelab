@@ -15,6 +15,7 @@ from pom.items import extract_items, ProductName
 logger = logging.getLogger(__name__)
 
 @pytest.mark.SMOKE
+@pytest.mark.REGRESSION
 def test_purchase_happy_path(page, base_url, products_url, checkout_data, checkout_complete_data):
     """
     Verify that a user can complete a purchase from login to checkout.

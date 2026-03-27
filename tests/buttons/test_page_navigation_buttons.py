@@ -14,6 +14,7 @@ from pom.startingpage import StartingPage
 logger = logging.getLogger(__name__)
 
 @pytest.mark.SMOKE
+@pytest.mark.FUNCTIONAL
 def test_page_navigation_buttons(page, base_url, checkout_data):
     """
     Verify that a user can complete a purchase from login to checkout.

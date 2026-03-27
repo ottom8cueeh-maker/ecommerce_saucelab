@@ -1,12 +1,14 @@
 """Tests for the social media footer links on the SauceDemo inventory page."""
 import logging
 from playwright.sync_api import expect
+import pytest
 from pom.inventory import InventoryPage
 from pom.startingpage import StartingPage
 from pom.login import LoginPage
 
 logger = logging.getLogger(__name__)
 
+@pytest.mark.FUNCTIONAL
 def test_social_media_links(page, base_url, x_url, facebook_url, linkedin_url):
     """
     Verify that the social media links in the footer of the inventory page navigate to the correct URLs.
