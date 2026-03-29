@@ -57,10 +57,10 @@ def test_add_remove_inventoryitem(page, base_url):
 
     # click on item name
     page.get_by_text(ProductName.BACKPACK.value).click()
+    logger.info("Navigated to inventory item details page for %s", ProductName.BACKPACK.value)
     inventory_item_page = InventoryItemPage(page)
-    inventory_item_page.add_to_cart_button.click()
-    logger.info("Added item to cart from inventory item details page")
-
+    inventory_item_page.add_to_cart()
+    
     shopping_cart = ShoppingCart(page)
     cart_count = shopping_cart.get_cart_items_count()
     assert cart_count == 1, f"Expected 1 item in cart, but found {cart_count}"
@@ -69,9 +69,9 @@ def test_add_remove_inventoryitem(page, base_url):
     inventory_item_page.back_to_products_button.click()
 
     page.get_by_text(ProductName.BIKE_LIGHT.value).click()
-    inventory_item_page.add_to_cart_button.click()
-    logger.info("Inventory-item page: Added item to cart from inventory item details page")
-
+    logger.info("Navigated to inventory item details page for %s", ProductName.BIKE_LIGHT.value)
+    inventory_item_page.add_to_cart()
+  
     cart_count = shopping_cart.get_cart_items_count()
     assert cart_count == 2, f"Expected 2 items in cart, but found {cart_count}"
     logger.info("Verify: Total of %d item(s) are in the shopping cart", cart_count)
@@ -79,8 +79,8 @@ def test_add_remove_inventoryitem(page, base_url):
     inventory_item_page.back_to_products_button.click()
 
     page.get_by_text(ProductName.BACKPACK.value).click()
-    inventory_item_page.remove_from_cart_button.click()
-    logger.info("Inventory-item page: Removed item from cart from inventory item details page")
+    logger.info("Navigated back to inventory item details page for %s", ProductName.BACKPACK.value)
+    inventory_item_page.remove_from_cart()
 
     cart_count = shopping_cart.get_cart_items_count()
     assert cart_count == 1, f"Expected 1 item in cart, but found {cart_count}"
