@@ -29,7 +29,7 @@ class InventoryPage:
         """Return the total number of product images displayed on the page."""
         return self.items_image.count()
 
-    def get_all_inventory_items(self) -> list[InventoryItem]:
+    def get_all_inventory_items(self) -> dict[str, InventoryItem]:
         """Return all inventory items on the page with their buttons and image URLs populated."""
         results = extract_items(self.items)
 
@@ -39,7 +39,9 @@ class InventoryPage:
             item.add_to_cart_button = element.get_by_role("button", name="Add to cart")
             item.remove_from_cart_button = element.get_by_role("button", name="Remove")
 
-        return results
+        items_by_name = {item.name: item for item in results}
+        return items_by_name
+
 
     def sort_items(self, sort_option: Literal["az", "za", "lohi", "hilo"]):
         """Sort the inventory items using the provided sort option."""

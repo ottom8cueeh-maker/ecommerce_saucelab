@@ -3,7 +3,7 @@ import logging
 import pytest
 from playwright.sync_api import expect
 from pom.inventory import InventoryPage
-from pom.items import ProductName
+from pom.items import ProductName, add_to_cart, remove_from_cart
 from pom.login import LoginPage
 from pom.shopping_cart import ShoppingCart
 from pom.startingpage import StartingPage
@@ -50,15 +50,13 @@ def test_add_remove_buttons(page, base_url):
     logger.info("%s loaded successfully", products_url)
 
     # inventory page: Add  item(s) to shopping cart
-    inventory_items = inventory_page.get_all_inventory_items()
-    inventory_items_by_name = {item.name: item for item in inventory_items}
-
-    inventory_items_by_name[ProductName.BACKPACK.value].add_to_cart_button.click()
-    inventory_items_by_name[ProductName.BIKE_LIGHT.value].add_to_cart_button.click()
-    inventory_items_by_name[ProductName.BOLT_T_SHIRT.value].add_to_cart_button.click()
-    inventory_items_by_name[ProductName.FLEECE_JACKET.value].add_to_cart_button.click()
-    inventory_items_by_name[ProductName.ONESIE.value].add_to_cart_button.click()
-    inventory_items_by_name[ProductName.ALL_THE_THINGS_T_SHIRT.value].add_to_cart_button.click()
+    items = inventory_page.get_all_inventory_items()
+    add_to_cart(items[ProductName.BACKPACK.value])
+    add_to_cart(items[ProductName.BIKE_LIGHT.value])
+    add_to_cart(items[ProductName.BOLT_T_SHIRT.value])
+    add_to_cart(items[ProductName.FLEECE_JACKET.value])
+    add_to_cart(items[ProductName.ONESIE.value])
+    add_to_cart(items[ProductName.ALL_THE_THINGS_T_SHIRT.value])
 
     logger.info("Inventory page: Added items to shopping cart...")
 
@@ -69,11 +67,11 @@ def test_add_remove_buttons(page, base_url):
     logger.info("Verify: Total of %d item(s) successfully added to shopping cart", cart_count)
 
     # inventory page: remove item(s) from shopping cart
-    inventory_items_by_name[ProductName.BACKPACK.value].remove_from_cart_button.click()
+    remove_from_cart(items[ProductName.BACKPACK.value])
     logger.info("Inventory page: Removed '%s' from shopping cart...", ProductName.BACKPACK.value)
-    inventory_items_by_name[ProductName.BIKE_LIGHT.value].remove_from_cart_button.click()
+    remove_from_cart(items[ProductName.BIKE_LIGHT.value])
     logger.info("Inventory page: Removed '%s' from shopping cart...", ProductName.BIKE_LIGHT.value)
-    inventory_items_by_name[ProductName.ONESIE.value].remove_from_cart_button.click()
+    remove_from_cart(items[ProductName.ONESIE.value])
     logger.info("Inventory page: Removed '%s' from shopping cart...", ProductName.ONESIE.value)
 
     # verify cart icon item count is updated
@@ -95,12 +93,12 @@ def test_add_remove_buttons(page, base_url):
 
     cart = ShoppingCart(page)
     cart_items = cart.get_items()
-    cart_items_by_name = {item.name: item for item in cart_items}
+    cart_item_name = {item.name: item for item in cart_items}
 
     # remove method #1: remove items from cart.html page
-    cart_items_by_name[ProductName.BOLT_T_SHIRT.value].remove_from_cart_button.click()
+    remove_from_cart(cart_item_name[ProductName.BOLT_T_SHIRT.value])
     logger.info("cart page: Removed '%s' from shopping cart...", ProductName.BOLT_T_SHIRT.value)
-    cart_items_by_name[ProductName.FLEECE_JACKET.value].remove_from_cart_button.click()
+    remove_from_cart(cart_item_name[ProductName.FLEECE_JACKET.value])
     logger.info("cart page: Removed '%s' from shopping cart...", ProductName.FLEECE_JACKET.value)
 
     # grab cart items for comparison later

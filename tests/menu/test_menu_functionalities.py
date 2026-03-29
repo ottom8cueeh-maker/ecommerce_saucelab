@@ -3,7 +3,7 @@ import logging
 from playwright.sync_api import expect
 import pytest
 from pom.inventory import InventoryPage
-from pom.items import ProductName
+from pom.items import ProductName, add_to_cart
 from pom.login import LoginPage
 from pom.menu import MenuItems
 from pom.shopping_cart import ShoppingCart
@@ -88,12 +88,11 @@ def test_menu_sidebar(page, base_url, products_url):
 
     # ---------- reset app state ----------
     # inventory page: Add  item(s) to shopping cart
-    inventory_items = inventory_page.get_all_inventory_items()
-    inventory_items_by_name = {item.name: item for item in inventory_items}
-
+    items = inventory_page.get_all_inventory_items()
+  
     # setup: add item to cart so we can verify it gets cleared by reset app state
-    inventory_items_by_name[ProductName.BACKPACK.value].add_to_cart_button.click()
-    inventory_items_by_name[ProductName.BIKE_LIGHT.value].add_to_cart_button.click()
+    add_to_cart(items[ProductName.BACKPACK.value])
+    add_to_cart(items[ProductName.BIKE_LIGHT.value])
     logger.info("Inventory page: added 2 item(s) to shopping cart...")
 
     # reopen menu from inventory page

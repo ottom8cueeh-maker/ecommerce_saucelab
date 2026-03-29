@@ -10,7 +10,7 @@ from pom.inventory import InventoryPage
 from pom.login import LoginPage
 from pom.shopping_cart import ShoppingCart
 from pom.startingpage import StartingPage
-from pom.items import extract_items, ProductName
+from pom.items import add_to_cart, extract_items, ProductName
 
 logger = logging.getLogger(__name__)
 
@@ -54,11 +54,10 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     logger.info("%s loaded successfully", products_url)
 
     # Add  item(s) to shopping cart
-    inventory_items = inventory_page.get_all_inventory_items()
-    inventory_items_by_name = {item.name: item for item in inventory_items}
-    inventory_items_by_name[ProductName.BACKPACK.value].add_to_cart_button.click()
-    inventory_items_by_name[ProductName.BIKE_LIGHT.value].add_to_cart_button.click()
-    inventory_items_by_name[ProductName.FLEECE_JACKET.value].add_to_cart_button.click()
+    items = inventory_page.get_all_inventory_items()
+    add_to_cart(items[ProductName.BACKPACK.value])
+    add_to_cart(items[ProductName.BIKE_LIGHT.value])
+    add_to_cart(items[ProductName.FLEECE_JACKET.value])
 
     #verify cart icon item count is updated
     shopping_cart = ShoppingCart(page)
