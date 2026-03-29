@@ -7,6 +7,7 @@ from pom.checkout_step_one import CheckoutStepOnePage
 from pom.checkout_step_two import CheckoutStepTwoPage
 from pom.checkout_complete import CheckoutCompletePage
 from pom.inventory import InventoryPage
+from pom.items import ProductName, add_to_cart
 from pom.login import LoginPage
 from pom.shopping_cart import ShoppingCart
 from pom.startingpage import StartingPage
@@ -63,7 +64,8 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
 
     # Add  item(s) to shopping cart
     items = inventory_page.get_all_inventory_items()
-    items[0].add_to_cart_button.click()
+    add_to_cart(items[ProductName.BACKPACK.value])
+    logger.info("Added '%s' to shopping cart...", ProductName.BACKPACK.value)
     logger.info("Test step: Adding first item to shopping cart...")
 
     shopping_cart = ShoppingCart(page)

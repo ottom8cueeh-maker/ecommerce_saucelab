@@ -3,6 +3,7 @@ import logging
 from playwright.sync_api import expect
 import pytest
 from pom.inventory import InventoryPage
+from pom.items import get_item_prices
 from pom.startingpage import StartingPage
 from pom.login import LoginPage
 
@@ -50,7 +51,7 @@ def test_product_sorter(page, base_url):
     inventory_page.sort_items("lohi" )
     logger.info("Sorting products by price (low to high)...")
     items = inventory_page.get_all_inventory_items()
-    prices = [item.price for item in items]
+    prices = get_item_prices(items.values())
     assert prices == sorted(prices), "Products are not sorted by price (low to high)"
     logger.info("Verified products are sorted by price (low to high)")
 
@@ -58,7 +59,7 @@ def test_product_sorter(page, base_url):
     inventory_page.sort_items("hilo")
     logger.info("Sorting products by price (high to low)...")
     items = inventory_page.get_all_inventory_items()
-    prices = [item.price for item in items]
+    prices = get_item_prices(items.values())
     assert prices == sorted(prices, reverse=True), "Products are not sorted by price (high to low)"
     logger.info("Verified products are sorted by price (high to low)")
 
@@ -66,7 +67,7 @@ def test_product_sorter(page, base_url):
     inventory_page.sort_items("az")
     logger.info("Sorting products by name (A to Z)...")
     items = inventory_page.get_all_inventory_items()
-    names = [item.name for item in items]
+    names = [item.name for item in items.values()]
     assert names == sorted(names), "Products are not sorted by name (A to Z)"
     logger.info("Verified products are sorted by name (A to Z)")
 
@@ -74,6 +75,6 @@ def test_product_sorter(page, base_url):
     inventory_page.sort_items("za")
     logger.info("Sorting products by name (Z to A)...")
     items = inventory_page.get_all_inventory_items()
-    names = [item.name for item in items]
+    names = [item.name for item in items.values()]
     assert names == sorted(names, reverse=True), "Products are not sorted by name (Z to A)"
     logger.info("Verified products are sorted by name (Z to A)")

@@ -38,3 +38,21 @@ def extract_items(item_locator) -> list[InventoryItem]:
         results.append(InventoryItem(name=name, price=price, description=description))
 
     return results
+
+def add_to_cart(item: InventoryItem):
+    """Click the 'Add to Cart' button for a given item."""
+    if item.add_to_cart_button is not None:
+        item.add_to_cart_button.click()
+    else:
+        raise ValueError(f"Item '{item.name}' does not have an 'Add to Cart' button locator defined.")
+
+def remove_from_cart(item: InventoryItem):
+    """Click the 'Remove' button for a given item."""
+    if item.remove_from_cart_button is not None:
+        item.remove_from_cart_button.click()
+    else:
+        raise ValueError(f"Item '{item.name}' does not have a 'Remove from Cart' button locator defined.")
+
+def get_item_prices(items: list[InventoryItem]) -> list[float]:
+    """Helper function to extract just the prices from a list of InventoryItems."""
+    return [item.price for item in items]
