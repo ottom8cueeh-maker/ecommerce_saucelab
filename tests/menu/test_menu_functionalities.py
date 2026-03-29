@@ -89,7 +89,7 @@ def test_menu_sidebar(page, base_url, products_url):
     # ---------- reset app state ----------
     # inventory page: Add  item(s) to shopping cart
     items = inventory_page.get_all_inventory_items()
-  
+
     # setup: add item to cart so we can verify it gets cleared by reset app state
     add_to_cart(items[ProductName.BACKPACK.value])
     add_to_cart(items[ProductName.BIKE_LIGHT.value])
