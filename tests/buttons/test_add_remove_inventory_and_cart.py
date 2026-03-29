@@ -58,7 +58,7 @@ def test_add_remove_buttons(page, base_url):
     add_to_cart(items[ProductName.ONESIE.value])
     add_to_cart(items[ProductName.ALL_THE_THINGS_T_SHIRT.value])
 
-    logger.info("Inventory page: Added items to shopping cart...")
+    logger.info("Inventory page: Added 6 items to shopping cart...")
 
     # inventory page: verify cart icon item count is updated
     shopping_cart = ShoppingCart(page)
@@ -68,11 +68,8 @@ def test_add_remove_buttons(page, base_url):
 
     # inventory page: remove item(s) from shopping cart
     remove_from_cart(items[ProductName.BACKPACK.value])
-    logger.info("Inventory page: Removed '%s' from shopping cart...", ProductName.BACKPACK.value)
     remove_from_cart(items[ProductName.BIKE_LIGHT.value])
-    logger.info("Inventory page: Removed '%s' from shopping cart...", ProductName.BIKE_LIGHT.value)
     remove_from_cart(items[ProductName.ONESIE.value])
-    logger.info("Inventory page: Removed '%s' from shopping cart...", ProductName.ONESIE.value)
 
     # verify cart icon item count is updated
     shopping_cart = ShoppingCart(page)
@@ -97,9 +94,8 @@ def test_add_remove_buttons(page, base_url):
 
     # remove method #1: remove items from cart.html page
     remove_from_cart(cart_item_name[ProductName.BOLT_T_SHIRT.value])
-    logger.info("cart page: Removed '%s' from shopping cart...", ProductName.BOLT_T_SHIRT.value)
     remove_from_cart(cart_item_name[ProductName.FLEECE_JACKET.value])
-    logger.info("cart page: Removed '%s' from shopping cart...", ProductName.FLEECE_JACKET.value)
+
 
     # grab cart items for comparison later
     cart_count = shopping_cart.get_cart_items_count()

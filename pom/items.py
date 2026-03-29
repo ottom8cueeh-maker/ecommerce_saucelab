@@ -1,4 +1,5 @@
 """Shared data models and helpers used across all page objects."""
+from asyncio.log import logger
 from dataclasses import dataclass
 from enum import Enum
 from playwright.sync_api import Locator
@@ -43,6 +44,7 @@ def add_to_cart(item: InventoryItem):
     """Click the 'Add to Cart' button for a given item."""
     if item.add_to_cart_button is not None:
         item.add_to_cart_button.click()
+        logger.info("Add to Cart: %s", item.name)
     else:
         raise ValueError(f"Item '{item.name}' does not have an 'Add to Cart' button locator defined.")
 
@@ -50,6 +52,7 @@ def remove_from_cart(item: InventoryItem):
     """Click the 'Remove' button for a given item."""
     if item.remove_from_cart_button is not None:
         item.remove_from_cart_button.click()
+        logger.info("Remove from Cart: %s", item.name)
     else:
         raise ValueError(f"Item '{item.name}' does not have a 'Remove from Cart' button locator defined.")
 
