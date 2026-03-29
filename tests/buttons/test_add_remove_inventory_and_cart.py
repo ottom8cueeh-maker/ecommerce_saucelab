@@ -96,7 +96,6 @@ def test_add_remove_buttons(page, base_url):
     remove_from_cart(cart_item_name[ProductName.BOLT_T_SHIRT.value])
     remove_from_cart(cart_item_name[ProductName.FLEECE_JACKET.value])
 
-
     # grab cart items for comparison later
     cart_count = shopping_cart.get_cart_items_count()
     assert cart_count == 1, f"Expected 1 item in cart, but found {cart_count}"
