@@ -47,5 +47,5 @@ def test_valid_credentials(page, base_url, products_url):
     assert inventory_page.items_filter_sorter.is_visible(), "Item filter sorter is not visible"
     logger.info("Result: Item filter sorter is visible, test passed")
 
-    sl_menu.menu_button.click()
-    sl_menu.logout.click()
+    sl_menu.open_menu()
+    sl_menu.click_logout()
