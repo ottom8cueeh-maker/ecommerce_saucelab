@@ -170,7 +170,6 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
 
     #click back home button to return to inventory page
     checkout_complete_page.click_back_home_button()
-    logger.info("Navigate: Clicking back home button ---> inventory page")
 
      # wait for page to load
     page.wait_for_url(products_url)

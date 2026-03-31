@@ -1,8 +1,10 @@
 """Page Object Model for the SauceDemo checkout step two (order summary) page."""
+import logging
 from playwright.sync_api import Page
 from pom.menu import MenuItems
 from pom.items import InventoryItem, extract_items
 
+logger = logging.getLogger(__name__)
 
 class CheckoutStepTwoPage:
     """Encapsulates interactions with the checkout step two (order review) page."""
@@ -55,9 +57,10 @@ class CheckoutStepTwoPage:
         """Click the Continue button (unused on this page but available for completeness)."""
         self.continue_button.click()
 
-    def click_cancel_button(self):
+    def click_step2_cancel_button(self):
         """Click the Cancel button to return to the cart."""
         self.cancel_button.click()
+        logger.info("Clicking cancel button...")
 
     def click_finish_button(self):
         """Click the Finish button to complete the purchase."""

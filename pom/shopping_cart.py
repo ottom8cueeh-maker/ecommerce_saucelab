@@ -49,6 +49,7 @@ class ShoppingCart:
     def click_continue_shopping_button(self):
         """Click the continue shopping button to return to the inventory page."""
         self.continue_shopping_button.click()
+        logger.info("Clicking continue shopping button...")
 
     def get_remove_item_button_locator(self, item_name: str):
         """Return the locator for the remove button of the given item, identified by its display name."""
