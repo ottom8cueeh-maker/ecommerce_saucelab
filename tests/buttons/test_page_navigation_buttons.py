@@ -145,7 +145,6 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
     logger.info("<<< Start:  checkout complete page...")
     # click back home button
     checkout_complete_page.click_back_home_button()
-    logger.info("Clicking back home button...")
 
     # verify inventory page is loaded
     page.wait_for_load_state("domcontentloaded")
@@ -159,16 +158,13 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
     expect(checkout_page_two.cancel_button).to_be_visible()
     logger.info("<<< Start:  checkout step two page...")
 
-
     # click cancel button
-    checkout_page_two.click_cancel_button()
-    logger.info("Clicking cancel button...")
+    checkout_page_two.click_step2_cancel_button()
 
     # verify inventory page is loaded
     page.wait_for_load_state("domcontentloaded")
     expect(inventory_page.shopping_cart).to_be_visible()
     logger.info("Verify: Checkout step two page <--- inventory page - passed.")
-
 
     # ------- from checkout step one page <--- cart page -------
     # start
@@ -178,8 +174,7 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
     logger.info("<<< Start:  checkout step one page...")
 
     #click cancel button
-    checkout_page_one.click_cancel_button()
-    logger.info("Clicking cancel button...")
+    checkout_page_one.click_step1_cancel_button()
 
     # verify cart page is loaded
     page.wait_for_load_state("domcontentloaded")
@@ -194,7 +189,6 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
 
     # click continue shopping button
     shopping_cart.click_continue_shopping_button()
-    logger.info("Clicking continue shopping button...")
 
     # verify inventory page is loaded
     page.wait_for_load_state("domcontentloaded")

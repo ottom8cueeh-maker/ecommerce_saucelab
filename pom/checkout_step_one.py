@@ -30,6 +30,7 @@ class CheckoutStepOnePage:
         """Click the Continue button to advance to checkout step two."""
         self.continue_button.click()
 
-    def click_cancel_button(self):
+    def click_step1_cancel_button(self):
         """Click the Cancel button to return to the shopping cart."""
         self.cancel_button.click()
+        logger.info("Clicking cancel button...")
