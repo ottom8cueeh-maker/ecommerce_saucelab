@@ -78,7 +78,6 @@ def test_add_remove_buttons(page, base_url):
     logger.info("Verify: Total of %d item(s) are in the shopping cart", cart_count)
 
     shopping_cart.click_shopping_cart_icon()
-    logger.info("Navigate: Clicking shopping cart icon ---> shopping cart page...")
 
     # -------------------------------------- shopping cart page -----------------------------------
     # wait for page to load

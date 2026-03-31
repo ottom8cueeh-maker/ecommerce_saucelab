@@ -57,7 +57,6 @@ def test_menu_sidebar(page, base_url, products_url):
     # open menu from shopping cart page to verify menu is accessible from there as well; setup to test click 'all items' later
     shopping_cart = ShoppingCart(page)
     shopping_cart.click_shopping_cart_icon()
-    logger.info("Navigate: Clicking shopping cart icon ---> shopping cart page...")
 
     # click menu button:  open menu
     sl_menu.open_menu()

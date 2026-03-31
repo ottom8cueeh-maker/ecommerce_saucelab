@@ -40,6 +40,7 @@ class ShoppingCart:
         expect(self.shopping_cart_icon).to_be_visible()
         expect(self.shopping_cart_icon).to_be_enabled()
         self.shopping_cart_icon.click()
+        logger.info("Navigate: Clicking shopping cart icon ---> shopping cart page...")
 
     def click_checkout_button(self):
         """Click the checkout button to proceed to checkout."""
