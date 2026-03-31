@@ -60,8 +60,7 @@ def test_menu_sidebar(page, base_url, products_url):
     logger.info("Navigate: Clicking shopping cart icon ---> shopping cart page...")
 
     # click menu button:  open menu
-    sl_menu.menu_button.click()
-    logger.info("Clicking menu button ---> menu sidebar should be visible")
+    sl_menu.open_menu()
 
     # ---------- test menu open/close & items visibility ----------
     # verify menu items are visible
@@ -72,16 +71,13 @@ def test_menu_sidebar(page, base_url, products_url):
     logger.info("Verify: All menu items are visible when menu is opened")
 
     # click close menu button:  menu should be closed
-    sl_menu.menu_close.click()
-    logger.info("Clicking menu close button ---> menu sidebar should be closed")
+    sl_menu.close_menu()
 
     # reopen menu
-    sl_menu.menu_button.click()
-    logger.info("Clicking menu button ---> menu sidebar should be visible")
+    sl_menu.open_menu()
 
     # ---------- click menu item:  All items ----------
     sl_menu.click_all_items()
-    logger.info("Clicking 'All Items' menu item ---> should navigate to inventory page")
     page.wait_for_url(products_url)
     assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
     logger.info("Verify: Clicking 'All Items' menu item navigates to inventory page")
@@ -96,9 +92,8 @@ def test_menu_sidebar(page, base_url, products_url):
     logger.info("Inventory page: added 2 item(s) to shopping cart...")
 
     # reopen menu from inventory page
-    sl_menu.menu_button.click()   # ← menu is now open
+    sl_menu.open_menu()
     sl_menu.click_reset_app_state()
-    logger.info("Clicking 'Reset App State' menu item ---> should reset the app state (e.g. clear cart contents)")
 
     # verify cart is cleared after reset app state
     cart_count = shopping_cart.get_cart_items_count()
@@ -108,7 +103,6 @@ def test_menu_sidebar(page, base_url, products_url):
     # ---------- click menu item:  Logout ----------
     # Menu is still open
     sl_menu.click_logout()
-    logger.info("Clicking 'Logout' menu item ---> should navigate to login page")
     page.wait_for_url(base_url)
     assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
     logger.info("Verify: Clicking 'Logout' menu item navigates to login page")
