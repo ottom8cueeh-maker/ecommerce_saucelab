@@ -65,4 +65,3 @@ class CheckoutStepTwoPage:
     def click_finish_button(self):
         """Click the Finish button to complete the purchase."""
         self.finish_button.click()
-        logger.info("Clicking finish button...")
