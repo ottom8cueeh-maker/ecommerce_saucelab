@@ -55,12 +55,12 @@ class InventoryItemPage:
         self.back_to_products_button = self.page.locator("#back-to-products")
         self.add_to_cart_button = self.page.locator("#add-to-cart")
         self.remove_from_cart_button = self.page.locator("#remove")
-        
+
     def add_to_cart(self) -> str:
         """Click the 'Add to Cart' button for the inventory item details page."""
         self.add_to_cart_button.click()
         logger.info("Inventory-item page: Added item to cart from inventory item details page")
-        
+
     def remove_from_cart(self) -> str:
         """Click the 'Remove' button for the inventory item details page."""
         self.remove_from_cart_button.click()
