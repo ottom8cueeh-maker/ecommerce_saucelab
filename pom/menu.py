@@ -27,12 +27,12 @@ class MenuItems:
         """Click the X button to close the navigation menu."""
         self.menu_close.click()
         logger.info("Clicking menu close button ---> menu sidebar should be closed")
-        
+
     def click_logout(self):
         """Click the Logout link to sign out of the application."""
         self.logout.click()
         logger.info("Clicking 'Logout' menu item ---> should navigate to login page")
-        
+
     def click_all_items(self):
         """Click the All Items link to navigate to the inventory page."""
         self.all_items.click()
@@ -42,4 +42,3 @@ class MenuItems:
         """Click the Reset App State link to clear the cart and reset the session."""
         self.reset_app_state.click()
         logger.info("Clicking 'Reset App State' menu item ---> should reset the app state (e.g. clear cart contents)")
-    
