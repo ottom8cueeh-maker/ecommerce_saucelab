@@ -66,7 +66,6 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     logger.info("Verify: Total of %d item(s) successfully added to shopping cart", cart_count)
 
     shopping_cart.click_shopping_cart_icon()
-    logger.info("Navigate: Clicking shopping cart icon ---> shopping cart page...")
 
     # -------------------------------------- shopping cart page -----------------------------------
     # wait for page to load

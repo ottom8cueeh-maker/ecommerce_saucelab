@@ -72,7 +72,6 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
 
     # Click shopping cart icon
     shopping_cart.click_shopping_cart_icon()
-    logger.info("Click shopping cart icon...")
 
     # wait for cart page to load
     page.wait_for_load_state("domcontentloaded")

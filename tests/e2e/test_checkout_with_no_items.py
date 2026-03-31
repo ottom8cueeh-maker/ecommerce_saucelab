@@ -57,7 +57,6 @@ def test_checkout_with_no_items(page, base_url, products_url):
     logger.info("Verify: Total of %d item(s) successfully added to shopping cart", cart_count)
 
     shopping_cart.click_shopping_cart_icon()
-    logger.info("Navigate: Clicking shopping cart icon ---> shopping cart page...")
 
     # -------------------------------------- shopping cart page -----------------------------------
     # wait for page to load
