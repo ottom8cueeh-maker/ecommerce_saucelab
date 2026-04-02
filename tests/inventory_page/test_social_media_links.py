@@ -31,6 +31,7 @@ def test_social_media_links(page, base_url, x_url, facebook_url, linkedin_url):
     # TEST happy path login using credentials from environment variables
     logger.info("Logging in with valid credentials...")
     login_page.login(login_page.valid_username1, login_page.valid_password)
+
     # --------------------------- inventory page -----------------------------------
     # wait for inventory page to load
     page.wait_for_url(products_url)
