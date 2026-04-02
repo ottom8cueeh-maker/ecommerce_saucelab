@@ -33,10 +33,7 @@ def test_valid_credentials(page, base_url, products_url):
 
     # TEST SCENARIO #1: happy path login using credentials from environment variables
     logger.info("Test step: Logging in with valid credentials...")
-    login_page.enter_username(login_page.valid_username1)
-    login_page.enter_password(login_page.valid_password)
-    login_page.click_login()
-    logger.info("Result:  Login is successful, waiting for products page to load")
+    login_page.login(login_page.valid_username1, login_page.valid_password)
 
     # Verify successful login:  landing in inventory page
     page.wait_for_url(products_url)
