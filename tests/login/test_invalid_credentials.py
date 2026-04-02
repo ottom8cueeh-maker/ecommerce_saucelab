@@ -32,10 +32,7 @@ def test_invalid_credentials(page, base_url):
 
     # TEST SCENARIO #2: login using invalid credentials from environment variables
     logger.info("Test step: Logging in with invalid credentials...")
-    login_page.enter_username(login_page.bad_username)
-    login_page.enter_password(login_page.bad_password)
-    login_page.click_login()
-    logger.info("Result:  Login failed as expected")
+    login_page.login(login_page.bad_username, login_page.bad_password)
 
     # Verify unsuccessful login:  still on login page
     page.wait_for_url(base_url)

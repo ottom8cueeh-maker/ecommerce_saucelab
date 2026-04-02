@@ -34,10 +34,8 @@ def test_checkout_step_one_errors(page, base_url, checkout_step_one_url, checkou
     # TEST happy path login using credentials from environment variables
     logger.info("Logging in with valid credentials...")
     login_page = LoginPage(page)
-    login_page.enter_username(login_page.valid_username1)
-    login_page.enter_password(login_page.valid_password)
-    login_page.click_login()
-    logger.info("Login is successful --> waiting for products page to load")
+    login_page.login(login_page.valid_username1, login_page.valid_password)
+
     starting_page.goto_url(checkout_step_one_url)
 
     checkout_page_one = CheckoutStepOnePage(page)

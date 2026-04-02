@@ -39,10 +39,7 @@ def test_menu_sidebar(page, base_url, products_url):
 
     # TEST happy path login using credentials from environment variables
     logger.info("Logging in with valid credentials...")
-    login_page.enter_username(login_page.valid_username1)
-    login_page.enter_password(login_page.valid_password)
-    login_page.click_login()
-    logger.info("Verify:  Login is successful --> waiting for products page to load")
+    login_page.login(login_page.valid_username1, login_page.valid_password)
 
     # --------------------------- inventory page -----------------------------------
     # wait for page to load

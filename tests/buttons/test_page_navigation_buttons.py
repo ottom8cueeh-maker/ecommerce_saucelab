@@ -44,10 +44,7 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
 
     # TEST happy path login using credentials from environment variables
     logger.info("Logging in with valid credentials...")
-    login_page.enter_username(login_page.valid_username1)
-    login_page.enter_password(login_page.valid_password)
-    login_page.click_login()
-    logger.info("Login is successful --> waiting for products page to load")
+    login_page.login(login_page.valid_username1, login_page.valid_password)
 
     # --------------------------- inventory page -----------------------------------
     # wait for inventory page to load

@@ -40,3 +40,13 @@ class LoginPage:
         """Click the login button to submit the login form."""
         logger.info("Clicking login button")
         self.login_button.click()
+
+    def login(self, a_username: str, a_password: str):
+        """Convenience method to perform the entire login sequence."""
+        self.enter_username(a_username)
+        self.enter_password(a_password)
+        self.click_login()
+        if a_username == self.valid_username1 and a_password == self.valid_password:
+            logger.info("Login is successful --> waiting for products page to load.")
+        else:
+            logger.info("Login is unsuccessful.")
