@@ -29,56 +29,48 @@ def test_add_remove_inventoryitem(page, base_url):
         3. Add the item to the cart and verify the cart count updates.
         4. Remove the item from the cart and verify the cart count updates.
     """
+    # Initialize page objects
     login_page = LoginPage(page)
     products_url = f"{base_url}inventory.html"
     starting_page = StartingPage(page)
     starting_page.goto_url(base_url)
+    inventory_page = InventoryPage(page)
+    inventory_item_page = InventoryItemPage(page)
+    shopping_cart = ShoppingCart(page)
 
      # ------------------------------- Login page -----------------------------------
-    page.wait_for_url(base_url)
-    assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
-    logger.info("%s loaded successfully", base_url)
+    expect(page).to_have_url(base_url)
+    expect(login_page.login_button, message="Login button is not visible on the login page").to_be_visible()
+    logger.info("Login page: Logging in with valid credentials...")
 
     # TEST happy path login using credentials from environment variables
-    logger.info("Logging in with valid credentials...")
     login_page.login(login_page.valid_username1, login_page.valid_password)
 
      # --------------------------- inventory page -----------------------------------
     # wait for inventory page to load
-    page.wait_for_url(products_url)
-    inventory_page = InventoryPage(page)
-    page.wait_for_load_state("domcontentloaded")
+    expect(page).to_have_url(products_url)
     expect(inventory_page.shopping_cart).to_be_visible()
-    assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
     logger.info("%s loaded successfully", products_url)
 
     # click on item name
-    page.get_by_text(ProductName.BACKPACK.value).click()
-    logger.info("Navigated to inventory item details page for %s", ProductName.BACKPACK.value)
-    inventory_item_page = InventoryItemPage(page)
+    inventory_page.click_item_name(ProductName.BACKPACK.value)
     inventory_item_page.add_to_cart()
 
-    shopping_cart = ShoppingCart(page)
-    cart_count = shopping_cart.get_cart_items_count()
-    assert cart_count == 1, f"Expected 1 item in cart, but found {cart_count}"
-    logger.info("Verify: Total of %d item(s) are in the shopping cart", cart_count)
+    expect(shopping_cart.shopping_cart_badge, message="Expected 1 items in cart badge").to_have_text("1")
+    logger.info("Verify: Total of 1 item(s) are in the shopping cart")
 
     inventory_item_page.back_to_products_button.click()
 
-    page.get_by_text(ProductName.BIKE_LIGHT.value).click()
-    logger.info("Navigated to inventory item details page for %s", ProductName.BIKE_LIGHT.value)
+    inventory_page.click_item_name(ProductName.BIKE_LIGHT.value)
     inventory_item_page.add_to_cart()
 
-    cart_count = shopping_cart.get_cart_items_count()
-    assert cart_count == 2, f"Expected 2 items in cart, but found {cart_count}"
-    logger.info("Verify: Total of %d item(s) are in the shopping cart", cart_count)
+    expect(shopping_cart.shopping_cart_badge, message="Expected 2 items in cart badge").to_have_text("2")
+    logger.info("Verify: Total of 2 item(s) are in the shopping cart")
 
     inventory_item_page.back_to_products_button.click()
 
-    page.get_by_text(ProductName.BACKPACK.value).click()
-    logger.info("Navigated back to inventory item details page for %s", ProductName.BACKPACK.value)
+    inventory_page.click_item_name(ProductName.BACKPACK.value)
     inventory_item_page.remove_from_cart()
 
-    cart_count = shopping_cart.get_cart_items_count()
-    assert cart_count == 1, f"Expected 1 item in cart, but found {cart_count}"
-    logger.info("Verify: Total of %d item(s) are in the shopping cart", cart_count)
+    expect(shopping_cart.shopping_cart_badge, message="Expected 1 items in cart badge").to_have_text("1")
+    logger.info("Verify: Total of 1 item(s) are in the shopping cart")
