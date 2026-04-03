@@ -36,8 +36,8 @@ def test_checkout_with_no_items(page, base_url):
 
     starting_page.goto_url(base_url)
     # ------------------------------- Login page -----------------------------------
-    page.wait_for_url(base_url)
-    assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
+    expect(page).to_have_url(base_url)
+    expect(login_page.login_button, message="Login button is not visible on the login page").to_be_visible()
     logger.info("%s loaded successfully", base_url)
 
     # TEST happy path login using credentials from environment variables

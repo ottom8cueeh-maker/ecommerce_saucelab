@@ -1,8 +1,10 @@
 """Shared data models and helpers used across all page objects."""
-from asyncio.log import logger
+import logging
 from dataclasses import dataclass
 from enum import Enum
 from playwright.sync_api import Locator
+
+logger = logging.getLogger(__name__)
 
 
 class ProductName(Enum):

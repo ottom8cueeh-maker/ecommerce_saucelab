@@ -28,7 +28,7 @@ def test_social_media_links(page, base_url, x_url, facebook_url, linkedin_url):
 
     starting_page.goto_url(base_url)
 
-     # ------------------------------- Login page -----------------------------------
+    # ------------------------------- Login page -----------------------------------
     expect(page).to_have_url(base_url)
     expect(login_page.login_button, message="Login button is not visible on the login page").to_be_visible()
 
@@ -50,7 +50,7 @@ def test_social_media_links(page, base_url, x_url, facebook_url, linkedin_url):
 
     new_page = new_page_info.value
     new_page.wait_for_load_state()
-    assert x_url in new_page.url, f"Expected URL containing {x_url}, got {new_page.url}"
+    expect(new_page).to_have_url(x_url)
     logger.info("Verified X (Twitter) link opens %s", new_page.url)
     new_page.close()
 
@@ -61,7 +61,7 @@ def test_social_media_links(page, base_url, x_url, facebook_url, linkedin_url):
 
     new_page = new_page_info.value
     new_page.wait_for_load_state()
-    assert facebook_url in new_page.url, f"Expected URL containing {facebook_url}, got {new_page.url}"
+    expect(new_page).to_have_url(facebook_url)
     logger.info("Verified Facebook link opens %s", new_page.url)
     new_page.close()
 
@@ -72,7 +72,6 @@ def test_social_media_links(page, base_url, x_url, facebook_url, linkedin_url):
 
     new_page = new_page_info.value
     new_page.wait_for_load_state()
-
-    assert linkedin_url in new_page.url, f"Expected URL containing {linkedin_url}, got {new_page.url}"
+    expect(new_page).to_have_url(linkedin_url)
     logger.info("Verified LinkedIn link opens %s", new_page.url)
     new_page.close()

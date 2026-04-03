@@ -25,9 +25,9 @@ def test_invalid_credentials(page, base_url):
     # Initialize page objects
     login_page = LoginPage(page)
     starting_page = StartingPage(page)
-    
+
     starting_page.goto_url(base_url)
-    
+
     expect(page).to_have_url(base_url)
     logger.info("%s loaded successfully", base_url)
 

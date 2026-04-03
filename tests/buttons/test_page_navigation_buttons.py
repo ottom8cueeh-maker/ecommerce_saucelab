@@ -75,7 +75,7 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
 
     # --------------------------- shopping cart page ---------------------------
     # wait for cart page to load
-    page.wait_for_load_state("domcontentloaded")
+    expect(page).to_have_url(cart_url)
     expect(shopping_cart.checkout_button).to_be_visible()
     logger.info("Verify: inventory page ---> Shopping cart page - passed")
 
@@ -86,7 +86,6 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
     shopping_cart.click_checkout_button()
     logger.info("Click checkout button...")
 
-    page.wait_for_load_state("domcontentloaded")
     expect(checkout_page_one.continue_button).to_be_visible()
     logger.info("Verify: shopping cart page ---> checkout step one page - passed")
 
@@ -104,7 +103,7 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
     logger.info("Clicking continue button...")
 
     # verify clicking continue button has no effect
-    assert page.url == checkout_step_one_url, f"Expected URL {checkout_step_one_url}, got {page.url}"
+    expect(page).to_have_url(checkout_step_one_url)
     logger.info("Verify: Clicking continue button with missing first name has no effect - passed")
 
     # enter first name, last name and zip code

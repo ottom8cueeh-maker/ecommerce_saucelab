@@ -31,7 +31,7 @@ def test_product_sorter(page, base_url):
     starting_page = StartingPage(page)
     starting_page.goto_url(base_url)
 
-     # ------------------------------- Login page -----------------------------------
+    # ------------------------------- Login page -----------------------------------
     expect(page).to_have_url(base_url)
     expect(login_page.login_button, message="Login button is not visible on the login page").to_be_visible()
     logger.info("Login page: Logging in with valid credentials...")

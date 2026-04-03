@@ -22,6 +22,7 @@ def test_checkout_step_one_errors(page, base_url, checkout_data, checkout_step_1
     """
     # Initialize page objects
     checkout_page_one = CheckoutStepOnePage(page)
+    login_page = LoginPage(page)
 
     # Define URLs for verification
     checkout_step_one_url = f"{base_url}checkout-step-one.html"
@@ -29,17 +30,14 @@ def test_checkout_step_one_errors(page, base_url, checkout_data, checkout_step_1
     starting_page = StartingPage(page)
     starting_page.goto_url(base_url)
 
-     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> buttons to move forward >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    logger.info(">>>>>>>>>>>> Testing navigation buttons that move user forward to next pages... >>>>>>>>>>>>")
+    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> buttons to move forward >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    logger.info(">>>>>>>>>>>> Testing navigation buttons that move user forward to next pages... >>>>>>>>>>>>") 
 
     # ------------------------------- Login page -----------------------------------
-    page.wait_for_url(base_url)
-    assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
-    logger.info("%s loaded successfully", base_url)
+    expect(page).to_have_url(base_url)
 
     # TEST happy path login using credentials from environment variables
     logger.info("Logging in with valid credentials...")
-    login_page = LoginPage(page)
     login_page.login(login_page.valid_username1, login_page.valid_password)
 
     starting_page.goto_url(checkout_step_one_url)
