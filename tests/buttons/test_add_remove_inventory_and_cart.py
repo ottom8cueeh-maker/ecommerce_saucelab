@@ -29,6 +29,7 @@ def test_add_remove_buttons(page, base_url):
     inventory_page = InventoryPage(page)
     shopping_cart = ShoppingCart(page)
 
+    # Define URLs for verification
     products_url = f"{base_url}inventory.html"
 
     starting_page.goto_url(base_url)

@@ -23,6 +23,7 @@ def test_checkout_step_one_errors(page, base_url, checkout_data, checkout_step_1
     # Initialize page objects
     checkout_page_one = CheckoutStepOnePage(page)
 
+    # Define URLs for verification
     checkout_step_one_url = f"{base_url}checkout-step-one.html"
 
     starting_page = StartingPage(page)

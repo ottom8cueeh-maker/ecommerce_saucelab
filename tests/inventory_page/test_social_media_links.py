@@ -20,11 +20,12 @@ def test_social_media_links(page, base_url, x_url, facebook_url, linkedin_url):
     """
     # Initialize page objects
     login_page = LoginPage(page)
-
     inventory_page = InventoryPage(page)
+    starting_page = StartingPage(page)
+
+    # Define URLs for verification
     products_url = f"{base_url}inventory.html"
 
-    starting_page = StartingPage(page)
     starting_page.goto_url(base_url)
 
      # ------------------------------- Login page -----------------------------------
