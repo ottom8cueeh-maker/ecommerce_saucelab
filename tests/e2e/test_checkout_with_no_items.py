@@ -38,9 +38,7 @@ def test_checkout_with_no_items(page, base_url, products_url):
 
     # TEST happy path login using credentials from environment variables
     logger.info("Logging in with valid credentials...")
-    login_page.enter_username(login_page.valid_username1)
-    login_page.enter_password(login_page.valid_password)
-    login_page.click_login()
+    login_page.login(login_page.valid_username1, login_page.valid_password)
     logger.info("Verify:  Login is successful --> waiting for products page to load")
 
     # --------------------------- inventory page -----------------------------------
@@ -63,5 +61,5 @@ def test_checkout_with_no_items(page, base_url, products_url):
 
     shopping_cart.click_checkout_button()
     logger.info("Navigate: Clicking checkout button on shopping cart page with NO ITEMS...should NOT advance to checkout step one page...")
-    assert page.url == f"{base_url}cart.html", f"Expected URL {base_url}cart.html, got {page.url}"
+    expect(page, message=f"Expected to stay on cart page but navigated away to: {page.url}").to_have_url(f"{base_url}cart.html")
     logger.info("Verify: User is NOT advanced to checkout step one page with empty cart - PASSED")
