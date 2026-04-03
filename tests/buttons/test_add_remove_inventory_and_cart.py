@@ -28,9 +28,9 @@ def test_add_remove_buttons(page, base_url, products_url):
     starting_page = StartingPage(page)
     inventory_page = InventoryPage(page)
     shopping_cart = ShoppingCart(page)
-    
+
     starting_page.goto_url(base_url)
-    
+
      # ------------------------------- Login page -----------------------------------
     page.wait_for_url(base_url)
     assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
