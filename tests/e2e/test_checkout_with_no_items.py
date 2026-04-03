@@ -30,6 +30,7 @@ def test_checkout_with_no_items(page, base_url):
     shopping_cart = ShoppingCart(page)
     inventory_page = InventoryPage(page)
 
+    # Define URLs for verification
     products_url = f"{base_url}inventory.html"
     cart_url = f"{base_url}cart.html"
 

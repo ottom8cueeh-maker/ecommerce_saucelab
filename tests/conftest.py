@@ -39,26 +39,6 @@ def checkout_complete_data(captured_data):  # noqa: F811
     return captured_data["checkout_complete"]
 
 @pytest.fixture
-def products_url():
-    """Return the URL for the inventory/products page."""
-    return "https://www.saucedemo.com/inventory.html"
-
-@pytest.fixture
-def cart_url():
-    """Return the URL for the shopping cart page."""
-    return "https://www.saucedemo.com/cart.html"
-
-@pytest.fixture
-def checkout_step_one_url():
-    """Return the URL for the checkout step one (customer info) page."""
-    return "https://www.saucedemo.com/checkout-step-one.html"
-
-@pytest.fixture
-def checkout_step_two_url():
-    """Return the URL for the checkout step two (order summary) page."""
-    return "https://www.saucedemo.com/checkout-step-two.html"
-
-@pytest.fixture
 def x_url():
     """Return the URL for the Sauce Labs dashboard."""
     return "https://x.com/saucelabs"

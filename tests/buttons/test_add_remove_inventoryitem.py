@@ -31,13 +31,15 @@ def test_add_remove_inventoryitem(page, base_url):
     """
     # Initialize page objects
     login_page = LoginPage(page)
-    products_url = f"{base_url}inventory.html"
     starting_page = StartingPage(page)
-    starting_page.goto_url(base_url)
     inventory_page = InventoryPage(page)
     inventory_item_page = InventoryItemPage(page)
     shopping_cart = ShoppingCart(page)
+    
+    # Define URLs for verification
+    products_url = f"{base_url}inventory.html"
 
+    starting_page.goto_url(base_url)
      # ------------------------------- Login page -----------------------------------
     expect(page).to_have_url(base_url)
     expect(login_page.login_button, message="Login button is not visible on the login page").to_be_visible()

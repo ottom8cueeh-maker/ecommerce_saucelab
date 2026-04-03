@@ -36,6 +36,7 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
     checkout_page_two = CheckoutStepTwoPage(page)
     checkout_complete_page = CheckoutCompletePage(page)
 
+    # Define URLs for verification
     products_url = f"{base_url}inventory.html"
     cart_url = f"{base_url}cart.html"
     checkout_step_one_url = f"{base_url}checkout-step-one.html"

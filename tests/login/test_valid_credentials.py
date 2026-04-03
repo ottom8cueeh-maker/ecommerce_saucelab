@@ -29,6 +29,7 @@ def test_valid_credentials(page, base_url):
     inventory_page = InventoryPage(page)
     sl_menu = MenuItems(page)
 
+    # Define URLs for verification
     products_url = f"{base_url}inventory.html"
 
     starting_page.goto_url(base_url)

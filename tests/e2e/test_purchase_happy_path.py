@@ -37,6 +37,7 @@ def test_purchase_happy_path(page, base_url, checkout_data, checkout_complete_da
     checkout_complete_page = CheckoutCompletePage(page)
     starting_page.goto_url(base_url)
 
+    # Define URLs for verification
     products_url = f"{base_url}inventory.html"
     checkout_step_one_url = f"{base_url}checkout-step-one.html"
     checkout_step_two_url = f"{base_url}checkout-step-two.html"
