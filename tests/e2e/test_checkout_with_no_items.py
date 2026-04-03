@@ -24,9 +24,12 @@ def test_checkout_with_no_items(page, base_url, products_url):
         5. Attempt to click the checkout button with no items in the cart.
         6. Verify the user remains on the cart page and is not advanced to checkout step one.
     """
+    # Initialize page objects
     login_page = LoginPage(page)
     starting_page = StartingPage(page)
     starting_page.goto_url(base_url)
+    shopping_cart = ShoppingCart(page)
+    inventory_page = InventoryPage(page)
 
     # ------------------------------- Login page -----------------------------------
     page.wait_for_url(base_url)
@@ -42,28 +45,20 @@ def test_checkout_with_no_items(page, base_url, products_url):
 
     # --------------------------- inventory page -----------------------------------
     # wait for page to load
-    page.wait_for_url(products_url)
-    inventory_page = InventoryPage(page)
-    page.wait_for_load_state("domcontentloaded")
+    expect(page).to_have_url(products_url)
     expect(inventory_page.shopping_cart).to_be_visible()
-
-    assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
     logger.info("%s loaded successfully", products_url)
 
     #verify cart icon item count is updated
-    shopping_cart = ShoppingCart(page)
-    cart_count = shopping_cart.get_cart_items_count()
-    assert cart_count == 0, f"Expected 0 items in cart, but found {cart_count}"
-    logger.info("Verify: Total of %d item(s) successfully added to shopping cart", cart_count)
+    expect(shopping_cart.shopping_cart_badge, message="Expected 0 items in cart badge").to_have_text("0")
+    logger.info("Verify: 0 item(s) successfully added to shopping cart")
 
     shopping_cart.click_shopping_cart_icon()
 
     # -------------------------------------- shopping cart page -----------------------------------
     # wait for page to load
-    page.wait_for_load_state("domcontentloaded")
+    expect(page).to_have_url(f"{base_url}cart.html")
     expect(shopping_cart.continue_shopping_button).to_be_visible()
-
-    assert page.url == f"{base_url}cart.html", f"Expected URL {base_url}cart.html, got {page.url}"
     logger.info("%scart.html loaded successfully", base_url)
 
     shopping_cart.click_checkout_button()
