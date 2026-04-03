@@ -18,27 +18,27 @@ def test_social_media_links(page, base_url, x_url, facebook_url, linkedin_url):
         2. Click on each social media link (Twitter, Facebook, LinkedIn) in the footer.
         3. Verify that each link opens the correct URL in a new tab.
     """
+    # Initialize page objects
     login_page = LoginPage(page)
+
+    inventory_page = InventoryPage(page)
     products_url = f"{base_url}inventory.html"
+
     starting_page = StartingPage(page)
     starting_page.goto_url(base_url)
 
      # ------------------------------- Login page -----------------------------------
-    page.wait_for_url(base_url)
-    assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
-    logger.info("%s loaded successfully", base_url)
+    expect(page).to_have_url(base_url)
+    expect(login_page.login_button, message="Login button is not visible on the login page").to_be_visible()
 
     # TEST happy path login using credentials from environment variables
-    logger.info("Logging in with valid credentials...")
+    logger.info("Login page: Logging in with valid credentials...")
     login_page.login(login_page.valid_username1, login_page.valid_password)
 
     # --------------------------- inventory page -----------------------------------
     # wait for inventory page to load
-    page.wait_for_url(products_url)
-    inventory_page = InventoryPage(page)
-    page.wait_for_load_state("domcontentloaded")
+    expect(page).to_have_url(products_url)
     expect(inventory_page.shopping_cart).to_be_visible()
-    assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
     logger.info("%s loaded successfully", products_url)
 
     # --------------------------- social media links -----------------------------------
@@ -57,6 +57,7 @@ def test_social_media_links(page, base_url, x_url, facebook_url, linkedin_url):
     with page.context.expect_page() as new_page_info:
         inventory_page.facebook_link.click()
         logger.info("Clicking Facebook footer link...")
+
     new_page = new_page_info.value
     new_page.wait_for_load_state()
     assert facebook_url in new_page.url, f"Expected URL containing {facebook_url}, got {new_page.url}"

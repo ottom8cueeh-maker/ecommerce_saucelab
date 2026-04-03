@@ -21,15 +21,19 @@ def test_product_sorter(page, base_url):
         4. Sort products by name (A to Z) and verify the order is correct.
         5. Sort products by name (Z to A) and verify the order is correct.
     """
+    # Initialize page objects
     login_page = LoginPage(page)
+    inventory_page = InventoryPage(page)
+
     products_url = f"{base_url}inventory.html"
+
     starting_page = StartingPage(page)
     starting_page.goto_url(base_url)
 
      # ------------------------------- Login page -----------------------------------
-    page.wait_for_url(base_url)
-    assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
-    logger.info("%s loaded successfully", base_url)
+    expect(page).to_have_url(base_url)
+    expect(login_page.login_button, message="Login button is not visible on the login page").to_be_visible()
+    logger.info("Login page: Logging in with valid credentials...")
 
     # TEST happy path login using credentials from environment variables
     logger.info("Logging in with valid credentials...")
@@ -37,11 +41,8 @@ def test_product_sorter(page, base_url):
 
      # --------------------------- inventory page -----------------------------------
     # wait for inventory page to load
-    page.wait_for_url(products_url)
-    inventory_page = InventoryPage(page)
-    page.wait_for_load_state("domcontentloaded")
+    expect(page).to_have_url(products_url)
     expect(inventory_page.shopping_cart).to_be_visible()
-    assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
     logger.info("%s loaded successfully", products_url)
 
     # sort prices low to high and verify
