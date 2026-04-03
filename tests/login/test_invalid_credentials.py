@@ -22,12 +22,12 @@ def test_invalid_credentials(page, base_url):
         - Error message is displayed.
         - Inventory list is not visible.
     """
+    # Initialize page objects
     login_page = LoginPage(page)
+
     starting_page = StartingPage(page)
     starting_page.goto_url(base_url)
-
-    page.wait_for_url(base_url)
-    assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
+    expect(page).to_have_url(base_url)
     logger.info("%s loaded successfully", base_url)
 
     # TEST SCENARIO #2: login using invalid credentials from environment variables
@@ -35,8 +35,7 @@ def test_invalid_credentials(page, base_url):
     login_page.login(login_page.bad_username, login_page.bad_password)
 
     # Verify unsuccessful login:  still on login page
-    page.wait_for_url(base_url)
-    assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
+    expect(page).to_have_url(base_url)
 
     error = page.locator('[data-test="error"]')
     expect(error).to_be_visible()

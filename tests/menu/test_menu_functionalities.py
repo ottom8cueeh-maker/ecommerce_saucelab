@@ -12,7 +12,7 @@ from pom.startingpage import StartingPage
 logger = logging.getLogger(__name__)
 
 @pytest.mark.FUNCTIONAL
-def test_menu_sidebar(page, base_url, products_url):
+def test_menu_sidebar(page, base_url):
     """
     Verify menu items are visible and functional.
 
@@ -27,13 +27,19 @@ def test_menu_sidebar(page, base_url, products_url):
         - Clicking "Logout" logs the user out and navigates to login page.
         - Clicking "Reset App State" resets the app state (e.g. cart contents).
     """
+    # Initialize page objects
     login_page = LoginPage(page)
     starting_page = StartingPage(page)
-    starting_page.goto_url(base_url)
     sl_menu = MenuItems(page)
+    inventory_page = InventoryPage(page)
+    shopping_cart = ShoppingCart(page)
+
+    products_url = f"{base_url}inventory.html"
+
+    starting_page.goto_url(base_url)
 
     # ------------------------------- Login page -----------------------------------
-    page.wait_for_url(base_url)
+    expect(page).to_have_url(base_url)
     assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
     logger.info("%s loaded successfully", base_url)
 
@@ -43,16 +49,11 @@ def test_menu_sidebar(page, base_url, products_url):
 
     # --------------------------- inventory page -----------------------------------
     # wait for page to load
-    page.wait_for_url(products_url)
-    inventory_page = InventoryPage(page)
-    page.wait_for_load_state("domcontentloaded")
+    expect(page).to_have_url(products_url)
     expect(inventory_page.shopping_cart).to_be_visible()
-
-    assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
     logger.info("%s loaded successfully", products_url)
 
     # open menu from shopping cart page to verify menu is accessible from there as well; setup to test click 'all items' later
-    shopping_cart = ShoppingCart(page)
     shopping_cart.click_shopping_cart_icon()
 
     # click menu button:  open menu
@@ -74,8 +75,7 @@ def test_menu_sidebar(page, base_url, products_url):
 
     # ---------- click menu item:  All items ----------
     sl_menu.click_all_items()
-    page.wait_for_url(products_url)
-    assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
+    expect(page).to_have_url(products_url)
     logger.info("Verify: Clicking 'All Items' menu item navigates to inventory page")
 
     # ---------- reset app state ----------
@@ -99,6 +99,5 @@ def test_menu_sidebar(page, base_url, products_url):
     # ---------- click menu item:  Logout ----------
     # Menu is still open
     sl_menu.click_logout()
-    page.wait_for_url(base_url)
-    assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
+    expect(page).to_have_url(base_url)
     logger.info("Verify: Clicking 'Logout' menu item navigates to login page")
