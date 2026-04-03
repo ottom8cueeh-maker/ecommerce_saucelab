@@ -48,6 +48,11 @@ class InventoryPage:
         """Sort the inventory items using the provided sort option."""
         self.product_sort_dropdown.select_option(sort_option)
 
+    def click_item_name(self, item_name: str):
+        """Click the item name to navigate to the inventory item details page."""
+        self.page.get_by_text(item_name, exact=True).click()
+        logger.info("Clicked on item name %s to navigate to inventory item details page", item_name)
+
 class InventoryItemPage:
     """Encapsulates interactions with a single inventory item details page."""
     def __init__(self, page: Page):
