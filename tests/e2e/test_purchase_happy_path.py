@@ -27,8 +27,14 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
         4. Verify checkout information
         5. Complete the purchase.
 """
+    # Initialize page objects
     login_page = LoginPage(page)
     starting_page = StartingPage(page)
+    inventory_page = InventoryPage(page)
+    shopping_cart = ShoppingCart(page)
+    checkout_page_one = CheckoutStepOnePage(page)
+    checkout_page_two = CheckoutStepTwoPage(page)
+    checkout_complete_page = CheckoutCompletePage(page)
     starting_page.goto_url(base_url)
 
     # ------------------------------- Login page -----------------------------------
@@ -43,7 +49,6 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     # --------------------------- inventory page -----------------------------------
     # wait for page to load
     page.wait_for_url(products_url)
-    inventory_page = InventoryPage(page)
     page.wait_for_load_state("domcontentloaded")
     expect(inventory_page.shopping_cart).to_be_visible()
 
@@ -57,7 +62,6 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     add_to_cart(items[ProductName.FLEECE_JACKET.value])
 
     #verify cart icon item count is updated
-    shopping_cart = ShoppingCart(page)
     cart_count = shopping_cart.get_cart_items_count()
     assert cart_count == 3, f"Expected 3 items in cart, but found {cart_count}"
     logger.info("Verify: Total of %d item(s) successfully added to shopping cart", cart_count)
@@ -83,7 +87,6 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     page.wait_for_url(f"{base_url}checkout-step-one.html")
     assert page.url == f"{base_url}checkout-step-one.html", f"Expected URL {base_url}checkout-step-one.html, got {page.url}"
 
-    checkout_page_one = CheckoutStepOnePage(page)
     page.wait_for_load_state("domcontentloaded")
     expect(checkout_page_one.cancel_button).to_be_visible()
     logger.info("%scheckout-step-one.html loaded successfully", base_url)
@@ -100,7 +103,6 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     page.wait_for_url(f"{base_url}checkout-step-two.html")
     assert page.url == f"{base_url}checkout-step-two.html", f"Expected URL {base_url}checkout-step-two.html, got {page.url}"
 
-    checkout_page_two = CheckoutStepTwoPage(page)
     page.wait_for_load_state("domcontentloaded")
     expect(checkout_page_two.finish_button).to_be_visible()
     logger.info("%scheckout-step-two.html loaded successfully", base_url)
@@ -142,7 +144,6 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     page.wait_for_url(f"{base_url}checkout-complete.html")
     assert page.url == f"{base_url}checkout-complete.html", f"Expected URL {base_url}checkout-complete.html, got {page.url}"
 
-    checkout_complete_page = CheckoutCompletePage(page)
     page.wait_for_load_state("domcontentloaded")
     expect(checkout_complete_page.back_home_button).to_be_visible()
     logger.info("%scheckout-complete.html loaded successfully", base_url)
