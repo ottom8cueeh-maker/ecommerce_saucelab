@@ -1,6 +1,7 @@
 """Tests for valid login credentials on the SauceDemo login page."""
 import logging
 import pytest
+from playwright.sync_api import expect
 from pom.inventory import InventoryPage
 from pom.login import LoginPage
 from pom.menu import MenuItems
@@ -9,7 +10,7 @@ from pom.startingpage import StartingPage
 logger = logging.getLogger(__name__)
 
 @pytest.mark.SMOKE
-def test_valid_credentials(page, base_url, products_url):
+def test_valid_credentials(page, base_url):
     """
     Verify that a user can log in with valid credentials.
 
@@ -22,27 +23,27 @@ def test_valid_credentials(page, base_url, products_url):
         - Redirected to the inventory/products page.
         - Inventory list filter sorter is visible.
     """
+    # initialize page objects
     login_page = LoginPage(page)
     starting_page = StartingPage(page)
-    starting_page.goto_url(base_url)
+    inventory_page = InventoryPage(page)
     sl_menu = MenuItems(page)
 
-    page.wait_for_url(base_url)
-    assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
-    logger.info("%s loaded successfully", base_url)
+    products_url = f"{base_url}inventory.html"
+
+    starting_page.goto_url(base_url)
+
+    expect(page).to_have_url(base_url)
+    expect(login_page.login_button, message="Login button is not visible on the login page").to_be_visible()
 
     # TEST SCENARIO #1: happy path login using credentials from environment variables
     logger.info("Test step: Logging in with valid credentials...")
     login_page.login(login_page.valid_username1, login_page.valid_password)
 
     # Verify successful login:  landing in inventory page
-    page.wait_for_url(products_url)
-    assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
-    logger.info("%s loaded successfully", products_url)
-
-    inventory_page = InventoryPage(page)
-    assert inventory_page.items_filter_sorter.is_visible(), "Item filter sorter is not visible"
-    logger.info("Result: Item filter sorter is visible, test passed")
+    expect(page).to_have_url(products_url)
+    expect(inventory_page.shopping_cart).to_be_visible()
+    logger.info("%s loaded successfully, test passed", products_url)
 
     sl_menu.open_menu()
     sl_menu.click_logout()
