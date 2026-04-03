@@ -10,7 +10,7 @@ from pom.startingpage import StartingPage
 logger = logging.getLogger(__name__)
 
 @pytest.mark.SMOKE
-def test_checkout_step_one_errors(page, base_url, checkout_step_one_url, checkout_data, checkout_step_1_errors):
+def test_checkout_step_one_errors(page, base_url, checkout_data, checkout_step_1_errors):
     """
     Verify that the correct error messages are displayed when required fields are
     omitted on the checkout step one form.
@@ -20,6 +20,11 @@ def test_checkout_step_one_errors(page, base_url, checkout_step_one_url, checkou
         2. Submit the form with each required field missing in turn.
         3. Verify the appropriate error message is shown for each missing field.
     """
+    # Initialize page objects
+    checkout_page_one = CheckoutStepOnePage(page)
+
+    checkout_step_one_url = f"{base_url}checkout-step-one.html"
+
     starting_page = StartingPage(page)
     starting_page.goto_url(base_url)
 
@@ -37,9 +42,7 @@ def test_checkout_step_one_errors(page, base_url, checkout_step_one_url, checkou
     login_page.login(login_page.valid_username1, login_page.valid_password)
 
     starting_page.goto_url(checkout_step_one_url)
-
-    checkout_page_one = CheckoutStepOnePage(page)
-    page.wait_for_load_state("domcontentloaded")
+    expect(page).to_have_url(checkout_step_one_url)
     expect(checkout_page_one.continue_button).to_be_visible()
     logger.info("Verify: shopping cart page ---> checkout step one page - passed")
 
