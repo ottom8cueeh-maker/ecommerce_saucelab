@@ -44,10 +44,14 @@ class ShoppingCart:
 
     def click_checkout_button(self):
         """Click the checkout button to proceed to checkout."""
+        expect(self.checkout_button).to_be_visible()
+        expect(self.checkout_button).to_be_enabled()
         self.checkout_button.click()
 
     def click_continue_shopping_button(self):
         """Click the continue shopping button to return to the inventory page."""
+        expect(self.continue_shopping_button).to_be_visible()
+        expect(self.continue_shopping_button).to_be_enabled()
         self.continue_shopping_button.click()
         logger.info("Clicking continue shopping button...")
 

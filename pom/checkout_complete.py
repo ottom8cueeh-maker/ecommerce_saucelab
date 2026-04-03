@@ -1,6 +1,6 @@
 """Page Object Model for the SauceDemo checkout complete page."""
 import logging
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 from pom.menu import MenuItems
 
 logger = logging.getLogger(__name__)
@@ -31,5 +31,7 @@ class CheckoutCompletePage:
 
     def click_back_home_button(self):
         """Click the 'Back Home' button to return to the inventory page."""
+        expect(self.back_home_button).to_be_visible()
+        expect(self.back_home_button).to_be_enabled()
         self.back_home_button.click()
         logger.info("Navigate: Clicking back home button ---> inventory page")
