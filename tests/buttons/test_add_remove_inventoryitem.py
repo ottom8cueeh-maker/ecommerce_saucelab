@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 @pytest.mark.SMOKE
 @pytest.mark.FUNCTIONAL
-def test_add_remove_inventoryitem(page, base_url):
+def test_add_remove_inventoryitem(page, base_url, products_url):
     """
     Verify that an item can be added to and removed from the cart on the inventory item details page.
 
@@ -35,9 +35,6 @@ def test_add_remove_inventoryitem(page, base_url):
     inventory_page = InventoryPage(page)
     inventory_item_page = InventoryItemPage(page)
     shopping_cart = ShoppingCart(page)
-    
-    # Define URLs for verification
-    products_url = f"{base_url}inventory.html"
 
     starting_page.goto_url(base_url)
 

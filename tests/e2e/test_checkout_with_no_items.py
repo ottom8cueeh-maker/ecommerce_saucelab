@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 @pytest.mark.SMOKE
 @pytest.mark.xfail(reason="Click checkout button with cart empty: goes to checkout step one page instead of remaining on cart page, with error displayed")
-def test_checkout_with_no_items(page, base_url):
+def test_checkout_with_no_items(page, base_url, products_url, cart_url):
     """
     Verify that a user cannot proceed to checkout when the shopping cart is empty.
 
@@ -29,10 +29,6 @@ def test_checkout_with_no_items(page, base_url):
     starting_page = StartingPage(page)
     shopping_cart = ShoppingCart(page)
     inventory_page = InventoryPage(page)
-
-    # Define URLs for verification
-    products_url = f"{base_url}inventory.html"
-    cart_url = f"{base_url}cart.html"
 
     starting_page.goto_url(base_url)
     # ------------------------------- Login page -----------------------------------

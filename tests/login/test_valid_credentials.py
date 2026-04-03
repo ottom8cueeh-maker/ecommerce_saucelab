@@ -10,7 +10,7 @@ from pom.startingpage import StartingPage
 logger = logging.getLogger(__name__)
 
 @pytest.mark.SMOKE
-def test_valid_credentials(page, base_url):
+def test_valid_credentials(page, base_url, products_url):
     """
     Verify that a user can log in with valid credentials.
 
@@ -28,9 +28,6 @@ def test_valid_credentials(page, base_url):
     starting_page = StartingPage(page)
     inventory_page = InventoryPage(page)
     sl_menu = MenuItems(page)
-
-    # Define URLs for verification
-    products_url = f"{base_url}inventory.html"
 
     starting_page.goto_url(base_url)
 

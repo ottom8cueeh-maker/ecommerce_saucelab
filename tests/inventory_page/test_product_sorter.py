@@ -10,7 +10,7 @@ from pom.login import LoginPage
 logger = logging.getLogger(__name__)
 
 @pytest.mark.FUNCTIONAL
-def test_product_sorter(page, base_url):
+def test_product_sorter(page, base_url, products_url):
     """
     Verify that the product sorting functionality on the inventory page works correctly.
 
@@ -24,9 +24,6 @@ def test_product_sorter(page, base_url):
     # Initialize page objects
     login_page = LoginPage(page)
     inventory_page = InventoryPage(page)
-
-    # Define URLs for verification
-    products_url = f"{base_url}inventory.html"
 
     starting_page = StartingPage(page)
     starting_page.goto_url(base_url)

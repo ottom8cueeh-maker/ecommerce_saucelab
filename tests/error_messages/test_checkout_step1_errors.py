@@ -10,7 +10,7 @@ from pom.startingpage import StartingPage
 logger = logging.getLogger(__name__)
 
 @pytest.mark.SMOKE
-def test_checkout_step_one_errors(page, base_url, checkout_data, checkout_step_1_errors):
+def test_checkout_step_one_errors(page, base_url, checkout_step_one_url, checkout_data, checkout_step_1_errors):
     """
     Verify that the correct error messages are displayed when required fields are
     omitted on the checkout step one form.
@@ -23,9 +23,6 @@ def test_checkout_step_one_errors(page, base_url, checkout_data, checkout_step_1
     # Initialize page objects
     checkout_page_one = CheckoutStepOnePage(page)
     login_page = LoginPage(page)
-
-    # Define URLs for verification
-    checkout_step_one_url = f"{base_url}checkout-step-one.html"
 
     starting_page = StartingPage(page)
     starting_page.goto_url(base_url)
