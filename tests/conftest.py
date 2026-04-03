@@ -51,4 +51,4 @@ def facebook_url():
 @pytest.fixture
 def linkedin_url():
     """Return the URL for the Sauce Labs LinkedIn page."""
-    return "https://www.linkedin.com/company/sauce-labs"
+    return "https://www.linkedin.com/company/sauce-labs/"

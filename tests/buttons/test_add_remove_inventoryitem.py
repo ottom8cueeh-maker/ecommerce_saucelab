@@ -40,7 +40,8 @@ def test_add_remove_inventoryitem(page, base_url):
     products_url = f"{base_url}inventory.html"
 
     starting_page.goto_url(base_url)
-     # ------------------------------- Login page -----------------------------------
+
+    # ------------------------------- Login page -----------------------------------
     expect(page).to_have_url(base_url)
     expect(login_page.login_button, message="Login button is not visible on the login page").to_be_visible()
     logger.info("Login page: Logging in with valid credentials...")

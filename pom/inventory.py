@@ -1,12 +1,14 @@
 """Page Object Model for the SauceDemo inventory (products) page."""
+import logging
 from typing import Literal
 from dotenv import load_dotenv
-from dotenv.main import logger
 from playwright.sync_api import Page
 from pom.items import InventoryItem, extract_items
 
 # Load environment variables from .env file
 load_dotenv()
+
+logger = logging.getLogger(__name__)
 
 
 class InventoryPage:

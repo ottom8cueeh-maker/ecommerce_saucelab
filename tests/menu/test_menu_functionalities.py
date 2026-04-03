@@ -41,7 +41,6 @@ def test_menu_sidebar(page, base_url):
 
     # ------------------------------- Login page -----------------------------------
     expect(page).to_have_url(base_url)
-    assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
     logger.info("%s loaded successfully", base_url)
 
     # TEST happy path login using credentials from environment variables
