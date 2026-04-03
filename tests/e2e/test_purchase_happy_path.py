@@ -38,21 +38,16 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     starting_page.goto_url(base_url)
 
     # ------------------------------- Login page -----------------------------------
-    page.wait_for_url(base_url)
-    assert page.url == base_url, f"Expected URL {base_url}, got {page.url}"
-    logger.info("%s loaded successfully", base_url)
+    expect(page).to_have_url(base_url)
+    expect(login_page.login_button, message="Login button is not visible on the login page").to_be_visible()
+    logger.info("Login page: Logging in with valid credentials...")
 
     # TEST happy path login using credentials from environment variables
-    logger.info("Logging in with valid credentials...")
     login_page.login(login_page.valid_username1, login_page.valid_password)
 
     # --------------------------- inventory page -----------------------------------
-    # wait for page to load
-    page.wait_for_url(products_url)
-    page.wait_for_load_state("domcontentloaded")
-    expect(inventory_page.shopping_cart).to_be_visible()
-
-    assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
+    expect(page).to_have_url(products_url)
+    expect(inventory_page.shopping_cart, message="Shopping cart is not visible on the inventory page").to_be_visible()
     logger.info("%s loaded successfully", products_url)
 
     # Add  item(s) to shopping cart
@@ -62,18 +57,13 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     add_to_cart(items[ProductName.FLEECE_JACKET.value])
 
     #verify cart icon item count is updated
-    cart_count = shopping_cart.get_cart_items_count()
-    assert cart_count == 3, f"Expected 3 items in cart, but found {cart_count}"
-    logger.info("Verify: Total of %d item(s) successfully added to shopping cart", cart_count)
-
+    expect(shopping_cart.shopping_cart_badge, message="Expected 3 items in cart badge").to_have_text("3")
+    logger.info("Verify: 3 item(s) successfully added to shopping cart")
+    
     shopping_cart.click_shopping_cart_icon()
 
     # -------------------------------------- shopping cart page -----------------------------------
-    # wait for page to load
-    page.wait_for_load_state("domcontentloaded")
-    expect(shopping_cart.continue_shopping_button).to_be_visible()
-
-    assert page.url == f"{base_url}cart.html", f"Expected URL {base_url}cart.html, got {page.url}"
+    expect(page).to_have_url(f"{base_url}cart.html")
     logger.info("%scart.html loaded successfully", base_url)
 
     # grab cart items for comparison later
@@ -83,12 +73,7 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     logger.info("Navigate: Clicking checkout button on shopping cart page ---> checkout step one page...")
 
     # ------------------------------ checkout step one page -----------------------------------
-    # wait for page to load
-    page.wait_for_url(f"{base_url}checkout-step-one.html")
-    assert page.url == f"{base_url}checkout-step-one.html", f"Expected URL {base_url}checkout-step-one.html, got {page.url}"
-
-    page.wait_for_load_state("domcontentloaded")
-    expect(checkout_page_one.cancel_button).to_be_visible()
+    expect(page).to_have_url(f"{base_url}checkout-step-one.html")
     logger.info("%scheckout-step-one.html loaded successfully", base_url)
 
     # checkout step one page: enter user information and continue to checkout step two page
@@ -99,12 +84,8 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     logger.info("Navigate: Clicking continue button on checkout step one page ---> checkout step two page...")
 
     # ------------------------------ checkout step two page -----------------------------------
-    # wait for page to load
-    page.wait_for_url(f"{base_url}checkout-step-two.html")
-    assert page.url == f"{base_url}checkout-step-two.html", f"Expected URL {base_url}checkout-step-two.html, got {page.url}"
-
-    page.wait_for_load_state("domcontentloaded")
-    expect(checkout_page_two.finish_button).to_be_visible()
+    expect(page).to_have_url(f"{base_url}checkout-step-two.html")
+    expect(checkout_page_two.finish_button, message="Finish button is not visible on the checkout step two page").to_be_visible()
     logger.info("%scheckout-step-two.html loaded successfully", base_url)
 
     # verify payment and shipping information are not empty
@@ -141,11 +122,7 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     logger.info("Navigate: Clicking finish button ---> checkout complete page")
 
     # --------------------------- checkout complete page -----------------------------------
-    page.wait_for_url(f"{base_url}checkout-complete.html")
-    assert page.url == f"{base_url}checkout-complete.html", f"Expected URL {base_url}checkout-complete.html, got {page.url}"
-
-    page.wait_for_load_state("domcontentloaded")
-    expect(checkout_complete_page.back_home_button).to_be_visible()
+    expect(page).to_have_url(f"{base_url}checkout-complete.html")
     logger.info("%scheckout-complete.html loaded successfully", base_url)
 
     # verify checkout complete!
@@ -169,7 +146,5 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     #click back home button to return to inventory page
     checkout_complete_page.click_back_home_button()
 
-     # wait for page to load
-    page.wait_for_url(products_url)
-    assert page.url == products_url, f"Expected URL {products_url}, got {page.url}"
+    expect(page).to_have_url(products_url)
     logger.info("Verify:  Successfully returned to inventory page at URL: %s", products_url)
