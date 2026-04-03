@@ -149,5 +149,5 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     checkout_complete_page.click_back_home_button()
 
     expect(page).to_have_url(products_url)
-    expect(inventory_page.shopping_cart).to_be_visible()    
+    expect(inventory_page.shopping_cart).to_be_visible()
     logger.info("Verify:  Successfully returned to inventory page at URL: %s", products_url)
