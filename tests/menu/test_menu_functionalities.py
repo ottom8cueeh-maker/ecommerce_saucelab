@@ -12,7 +12,7 @@ from pom.startingpage import StartingPage
 logger = logging.getLogger(__name__)
 
 @pytest.mark.FUNCTIONAL
-def test_menu_sidebar(page, base_url):
+def test_menu_sidebar(page, base_url, products_url):
     """
     Verify menu items are visible and functional.
 
@@ -33,9 +33,6 @@ def test_menu_sidebar(page, base_url):
     sl_menu = MenuItems(page)
     inventory_page = InventoryPage(page)
     shopping_cart = ShoppingCart(page)
-
-    # Define URLs for verification
-    products_url = f"{base_url}inventory.html"
 
     starting_page.goto_url(base_url)
 

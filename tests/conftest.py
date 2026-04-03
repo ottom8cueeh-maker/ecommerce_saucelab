@@ -38,9 +38,36 @@ def checkout_complete_data(captured_data):  # noqa: F811
     """Return the expected text values for the checkout complete confirmation page."""
     return captured_data["checkout_complete"]
 
+# URL fixtures for all pages in the user flow, for easy maintenance and readability in tests
+@pytest.fixture
+def products_url(base_url):
+    """Return the URL for the inventory/products page."""
+    return f"{base_url}inventory.html"
+
+@pytest.fixture
+def cart_url(base_url):
+    """Return the URL for the shopping cart page."""
+    return f"{base_url}cart.html"
+
+@pytest.fixture
+def checkout_step_one_url(base_url):
+    """Return the URL for the checkout step one (customer info) page."""
+    return f"{base_url}checkout-step-one.html"
+
+@pytest.fixture
+def checkout_step_two_url(base_url):
+    """Return the URL for the checkout step two (order summary) page."""
+    return f"{base_url}checkout-step-two.html"
+
+@pytest.fixture
+def checkout_complete_url(base_url):
+    """Return the URL for the checkout complete confirmation page."""
+    return f"{base_url}checkout-complete.html"
+
+# social media URLs for inventory page footer links
 @pytest.fixture
 def x_url():
-    """Return the URL for the Sauce Labs dashboard."""
+    """Return the URL for the Sauce Labs X (Twitter) page."""
     return "https://x.com/saucelabs"
 
 @pytest.fixture

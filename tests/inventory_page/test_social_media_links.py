@@ -9,7 +9,7 @@ from pom.login import LoginPage
 logger = logging.getLogger(__name__)
 
 @pytest.mark.FUNCTIONAL
-def test_social_media_links(page, base_url, x_url, facebook_url, linkedin_url):
+def test_social_media_links(page, base_url, products_url, x_url, facebook_url, linkedin_url):
     """
     Verify that the social media links in the footer of the inventory page navigate to the correct URLs.
 
@@ -22,9 +22,6 @@ def test_social_media_links(page, base_url, x_url, facebook_url, linkedin_url):
     login_page = LoginPage(page)
     inventory_page = InventoryPage(page)
     starting_page = StartingPage(page)
-
-    # Define URLs for verification
-    products_url = f"{base_url}inventory.html"
 
     starting_page.goto_url(base_url)
 

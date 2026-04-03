@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 @pytest.mark.SMOKE
 @pytest.mark.FUNCTIONAL
-def test_page_navigation_buttons(page, base_url, checkout_data):
+def test_page_navigation_buttons(page, base_url, products_url, cart_url, checkout_step_one_url, checkout_step_two_url, checkout_complete_url, checkout_data):
     """
     Verify that a user can complete a purchase from login to checkout.
 
@@ -35,13 +35,6 @@ def test_page_navigation_buttons(page, base_url, checkout_data):
     checkout_page_one = CheckoutStepOnePage(page)
     checkout_page_two = CheckoutStepTwoPage(page)
     checkout_complete_page = CheckoutCompletePage(page)
-
-    # Define URLs for verification
-    products_url = f"{base_url}inventory.html"
-    cart_url = f"{base_url}cart.html"
-    checkout_step_one_url = f"{base_url}checkout-step-one.html"
-    checkout_step_two_url = f"{base_url}checkout-step-two.html"
-    checkout_complete_url = f"{base_url}checkout-complete.html"
 
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> buttons to move forward >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     logger.info(">>>>>>>>>>>> Testing navigation buttons that move user forward to next pages... >>>>>>>>>>>>")

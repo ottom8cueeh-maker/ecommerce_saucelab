@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 @pytest.mark.SMOKE
 @pytest.mark.REGRESSION
-def test_purchase_happy_path(page, base_url, checkout_data, checkout_complete_data):
+def test_purchase_happy_path(page, base_url, products_url, cart_url, checkout_step_one_url, checkout_step_two_url, checkout_data, checkout_complete_data):
     """
     Verify that a user can complete a purchase from login to checkout.
 
@@ -36,12 +36,6 @@ def test_purchase_happy_path(page, base_url, checkout_data, checkout_complete_da
     checkout_page_two = CheckoutStepTwoPage(page)
     checkout_complete_page = CheckoutCompletePage(page)
     starting_page.goto_url(base_url)
-
-    # Define URLs for verification
-    products_url = f"{base_url}inventory.html"
-    checkout_step_one_url = f"{base_url}checkout-step-one.html"
-    checkout_step_two_url = f"{base_url}checkout-step-two.html"
-    cart_url = f"{base_url}cart.html"
 
     # ------------------------------- Login page -----------------------------------
     expect(page).to_have_url(base_url)
