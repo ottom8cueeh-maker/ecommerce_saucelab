@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 @pytest.mark.SMOKE
 @pytest.mark.FUNCTIONAL
-def test_add_remove_buttons(page, base_url, products_url):
+def test_add_remove_buttons(page, base_url):
     """
     Verify that items can be added to and removed from the cart on both the inventory and cart pages.
 
@@ -28,6 +28,8 @@ def test_add_remove_buttons(page, base_url, products_url):
     starting_page = StartingPage(page)
     inventory_page = InventoryPage(page)
     shopping_cart = ShoppingCart(page)
+
+    products_url = f"{base_url}inventory.html"
 
     starting_page.goto_url(base_url)
 
