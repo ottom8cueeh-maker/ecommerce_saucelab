@@ -37,6 +37,11 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     checkout_complete_page = CheckoutCompletePage(page)
     starting_page.goto_url(base_url)
 
+    products_url = f"{base_url}inventory.html"
+    checkout_step_one_url = f"{base_url}checkout-step-one.html"
+    checkout_step_two_url = f"{base_url}checkout-step-two.html"
+    cart_url = f"{base_url}cart.html"
+
     # ------------------------------- Login page -----------------------------------
     expect(page).to_have_url(base_url)
     expect(login_page.login_button, message="Login button is not visible on the login page").to_be_visible()
@@ -63,7 +68,7 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     shopping_cart.click_shopping_cart_icon()
 
     # -------------------------------------- shopping cart page -----------------------------------
-    expect(page).to_have_url(f"{base_url}cart.html")
+    expect(page).to_have_url(cart_url)
     expect(shopping_cart.continue_shopping_button).to_be_visible()
     logger.info("%scart.html loaded successfully", base_url)
 
@@ -74,7 +79,7 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     logger.info("Navigate: Clicking checkout button on shopping cart page ---> checkout step one page...")
 
     # ------------------------------ checkout step one page -----------------------------------
-    expect(page).to_have_url(f"{base_url}checkout-step-one.html")
+    expect(page).to_have_url(checkout_step_one_url)
     logger.info("%scheckout-step-one.html loaded successfully", base_url)
 
     # checkout step one page: enter user information and continue to checkout step two page
@@ -85,7 +90,7 @@ def test_purchase_happy_path(page, base_url, products_url, checkout_data, checko
     logger.info("Navigate: Clicking continue button on checkout step one page ---> checkout step two page...")
 
     # ------------------------------ checkout step two page -----------------------------------
-    expect(page).to_have_url(f"{base_url}checkout-step-two.html")
+    expect(page).to_have_url(checkout_step_two_url)
     expect(checkout_page_two.finish_button).to_be_visible()
     logger.info("%scheckout-step-two.html loaded successfully", base_url)
 
