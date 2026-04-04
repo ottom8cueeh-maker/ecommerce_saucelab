@@ -28,7 +28,7 @@ def test_checkout_step_one_errors(page, base_url, checkout_step_one_url, checkou
     starting_page.goto_url(base_url)
 
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> buttons to move forward >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    logger.info(">>>>>>>>>>>> Testing navigation buttons that move user forward to next pages... >>>>>>>>>>>>") 
+    logger.info(">>>>>>>>>>>> Testing navigation buttons that move user forward to next pages... >>>>>>>>>>>>")
 
     # ------------------------------- Login page -----------------------------------
     expect(page).to_have_url(base_url)
