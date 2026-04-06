@@ -31,7 +31,7 @@ When reviewing the provided code, flag issues and suggest improvements based on 
 - **Parametrization:** Suggest ` @pytest.mark.parametrize` if the same logic is repeated for different data sets.
 
 ## Output Format
-Provide feedback in a structured format:
+Provide feedback in a structured format with clear explanations and actionable suggestions:
 1. **Critical Issues:** (Stability risks, flaky code)
 2. **Best Practice Suggestions:** (POM improvements, locator shifts)
 3. **Refactored Snippet:** (A complete, corrected version of the code)
