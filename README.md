@@ -17,6 +17,10 @@ UI test automation project for [SauceDemo](https://www.saucedemo.com) using Pyth
 
 ```text
 ecommerce_saucelab/
+├── .github/
+│   └── agents/
+│       ├── code_review.agent.md             # reviews Playwright tests for best practices
+│       └── eof_1newline_trim_white_space.agent.md  # trims trailing whitespace and ensures single EOF newline
 ├── config/
 │   └── config.yaml
 ├── data/
@@ -77,7 +81,7 @@ ecommerce_saucelab/
 
 - `SMOKE` — core smoke tests
 - `REGRESSION` — regression tests
-- `NEGATIVE` — negative / edge-case tests
+- `FUNCTIONAL` — functional tests
 
 ## Prerequisites
 
@@ -136,9 +140,10 @@ URL fixtures are defined directly in `tests/conftest.py` (no YAML file).
 | `cart_url` | `https://www.saucedemo.com/cart.html` |
 | `checkout_step_one_url` | `https://www.saucedemo.com/checkout-step-one.html` |
 | `checkout_step_two_url` | `https://www.saucedemo.com/checkout-step-two.html` |
+| `checkout_complete_url` | `https://www.saucedemo.com/checkout-complete.html` |
 | `x_url` | `https://x.com/saucelabs` |
 | `facebook_url` | `https://www.facebook.com/saucelabs` |
-| `linkedin_url` | `https://www.linkedin.com/company/sauce-labs` |
+| `linkedin_url` | `https://www.linkedin.com/company/sauce-labs/` |
 
 ## Running Tests
 
@@ -161,7 +166,7 @@ pytest tests/e2e/test_purchase_happy_path.py
 pytest tests/login/
 pytest tests/buttons/
 pytest tests/error_messages/
-pytest tests/menu/test_menu_functionalities.py   # explicit path required — file lacks test_ prefix
+pytest tests/menu/test_menu_functionalities.py
 pytest tests/inventory_page/
 ```
 
@@ -170,10 +175,18 @@ pytest tests/inventory_page/
 The project uses `pytest.ini` for:
 
 - project root on `PYTHONPATH`
-- headed browser execution
-- slow motion for browser actions
-- base URL configuration
-- CLI logging
+- base URL configuration (`https://www.saucedemo.com/`)
+- CLI logging at `INFO` level
+- custom marker registration
+
+## GitHub Copilot Agents
+
+Custom VS Code Copilot agents are defined in `.github/agents/`.
+
+| Agent file | Name | Description |
+|---|---|---|
+| `code_review.agent.md` | `code_review` | Reviews Python Playwright tests for resilience, performance, and best practices |
+| `eof_1newline_trim_white_space.agent.md` | `add_newline_trim_white_space` | Trims trailing whitespace from `*.py` files and ensures each file ends with a single newline |
 
 ## Notes
 
